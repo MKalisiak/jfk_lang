@@ -1,0 +1,1 @@
+rm "$1.ll" "$1.exec" "$1.s" 2> /dev/null

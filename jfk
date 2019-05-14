@@ -4,8 +4,6 @@ filename=$(basename -- "$1")
 extension="${filename##*.}"
 filename="${filename%.*}"
 
-java Main $1 > "$filename.ll"
-~/llvm/bin/llc "$filename.ll"
-~/llvm/bin/clang "$filename.s" -o "$filename.exec"
-
-
+python main.py $1 > "$filename.ll"
+llc "$filename.ll"
+clang "$filename.s" -o "$filename.exec"
