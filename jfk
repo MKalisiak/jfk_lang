@@ -6,6 +6,6 @@ filename="${filename%.*}"
 
 java Main $1 > "$filename.ll"
 ~/llvm/bin/llc "$filename.ll"
-~/llvm/bin/clang "$filename.s" -o "$filename"
+~/llvm/bin/clang "$filename.s" -o "$filename.exec"
 
 
