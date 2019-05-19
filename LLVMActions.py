@@ -69,7 +69,38 @@ class LLVMActions(JFKListener):
         ...
 
     def exitMul(self, ctx: JFKParser.MulContext):
-        ...
+        print(self.stack, file=sys.stderr)
+        v1 = self.stack.pop()  # type: Value
+        v2 = self.stack.pop()  # type: Value
+
+        print(v1, v2, file=sys.stderr)
+
+        if v1.type == VarType.STRING or v2.type == VarType.STRING:
+            self.error(ctx.start.line, "Multiplication not permitted for type STRING")
+        else:
+            if v1.type != v2.type:
+                if v1.type == VarType.INT:
+                    self.generator.i32_to_double(v1.name)
+                    v1 = Value(str(self.generator.str_i - 1), VarType.FLOAT, True)
+                else:
+                    self.generator.i32_to_double(v2.name)
+                    v2 = Value(str(self.generator.str_i - 1), VarType.FLOAT, True)
+
+            if v1.type == VarType.INT:
+                if not v1.is_id and not v2.is_id:
+                    self.generator.mul_i32(v1.name, v2.name)
+                elif v1.is_id and v2.is_id:
+                    self.generator.mul_id_i32(v1.name, v2.name)
+                elif v1.is_id:
+                    self.generator.mul_hybrid_i32(_id=v1.name, value=v2.name)
+                else:
+                    self.generator.mul_hybrid_i32(value=v1.name, _id=v2.name)
+
+            elif v1.type == VarType.FLOAT:
+                self.generator.mul_double(v1.name, v2.name)
+
+
+            self.stack.append(Value(str(self.generator.str_i - 1), v1.type, True))
 
     def exitDiv(self, ctx: JFKParser.DivContext):
         ...
@@ -84,14 +115,25 @@ class LLVMActions(JFKListener):
         ID = ctx.ID().getText()  # type: str
         value = self.stack.pop()  # type: Value
         self.variables[ID] = value.type
-        if value.type == VarType.INT:
-            self.generator.declare_i32(ID)
-            self.generator.assign_i32(ID, value.name)
-        elif value.type == VarType.FLOAT:
-            self.generator.declare_double(ID)
-            self.generator.assign_double(ID, value.name)
-        elif value.type == VarType.STRING:
-            self.generator.assign_string(ID, value.name[1:-1])
+        if value.is_id:
+            if value.type == VarType.INT:
+                self.generator.declare_i32(ID)
+                self.generator.assign_id_i32(ID, value.name)
+            elif value.type == VarType.FLOAT:
+                self.generator.declare_double(ID)
+                self.generator.assign_id_double(ID, value.name)
+            elif value.type == VarType.STRING:
+                self.generator.assign_id_string(ID, value.name)
+        else:
+            if value.type == VarType.INT:
+                self.generator.declare_i32(ID)
+                self.generator.assign_i32(ID, value.name)
+            elif value.type == VarType.FLOAT:
+                self.generator.declare_double(ID)
+                self.generator.assign_double(ID, value.name)
+            elif value.type == VarType.STRING:
+                self.generator.assign_string(ID, value.name[1:-1])
+
 
     # def exitAdd(self, ctx: JFKParser.AddContext):
     #     v1 = self.stack.pop()  # type: Value

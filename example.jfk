@@ -1,15 +1,21 @@
 # comment
-a = 5.4
+#a = 5.4
+#
+#b = 7
+#
+#c = "Test"
+#output(c)
+#c = "dadsad"
+#output(b)
+#output("Dziala")
+#output(12)
+#
+#output(3.14)
+#output(c)
+#output(a)
 
-b = 7
-
-c = "Test"
-output(c)
-c = "dadsad"
+a = 6.66
+b = a
 output(b)
-output("Dziala")
-output(12)
 
-output(3.14)
-output(c)
 output(a)

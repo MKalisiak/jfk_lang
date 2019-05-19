@@ -11,7 +11,7 @@ class LLVMGenerator:
         self.main_text += ("call i32 (i8*, ...) @printf(i8* getelementptr inbounds ( " + str_type + ", " + str_type +
                            "* @str" + self.reg + ", i32 0, i32 0))\n")
         self.str_i += 1
-        
+
     @property
     def reg(self):
         return str(self.str_i)
@@ -21,7 +21,7 @@ class LLVMGenerator:
         self.str_i += 1
         self.main_text += "%" + self.reg + " = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @strpi, i32 0, i32 0), i32 %" + str(self.str_i - 1) + ")\n"
         self.str_i += 1
-        
+
     def output_id_double(self, _id: str):
         self.main_text += "%" + self.reg + " = load double, double* %" + _id + "\n"
         self.str_i += 1
@@ -80,6 +80,35 @@ class LLVMGenerator:
     def load_i32(self, _id: str):
         self.main_text += "%" + self.reg + " = load i32, i32* %" + _id + "\n"
         self.str_i += 1
+
+    def load_double(self, _id):
+        self.main_text += "%" + self.reg + " = load double, double* %" + _id + "\n"
+        self.str_i += 1
+
+    def mul_i32(self, value1, value2):
+        self.main_text += "%"+self.reg+" = mul i32 "+value1+", "+value2+"\n"
+        self.str_i += 1
+
+    def i32_to_double(self, value: str):
+        self.main_text += "%" + self.reg + " = sitofp i32 " + value + " to double\n"
+        self.str_i += 1
+
+    def mul_id_i32(self, name, name1):
+        pass
+
+    def assign_id_i32(self, target, source):
+        self.load_i32(source)
+        self.main_text += "store i32 %" + str(self.str_i - 1) + ", i32* %" + target + "\n"
+
+    def assign_id_double(self, target, source):
+        self.load_double(source)
+        self.main_text += "store double %" + str(self.str_i - 1) + ", double* %" + target + "\n"
+
+    # TODO: assign id string
+    """
+    mamy zapisanego consta, wiec wystarczy go załadować to nowej zmiennej. Mozna wyrzucic strcpy - może XD
+    """
+    # TODO: mule dokonczyc
 
     def generate(self):
         text = "declare i32 @printf(i8*, ...)\n"
