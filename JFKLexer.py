@@ -54,7 +54,7 @@ def serializedATN():
         buf.write("\u0080\3\2\2\2\u0080\u0081\b\23\2\2\u0081&\3\2\2\2\u0082")
         buf.write("\u0083\4\62;\2\u0083(\3\2\2\2\u0084\u0085\4c|\2\u0085")
         buf.write("*\3\2\2\2\u0086\u0087\4C\\\2\u0087,\3\2\2\2\u0088\u0089")
-        buf.write("\t\6\2\2\u0089.\3\2\2\2\13\2U]bhntw~\3\3\23\2")
+        buf.write("\t\6\2\2\u0089.\3\2\2\2\13\2U]bhntw~\3\b\2\2")
         return buf.getvalue()
 
 
@@ -108,23 +108,5 @@ class JFKLexer(Lexer):
         self._interp = LexerATNSimulator(self, self.atn, self.decisionsToDFA, PredictionContextCache())
         self._actions = None
         self._predicates = None
-
-
-    def action(self, localctx:RuleContext, ruleIndex:int, actionIndex:int):
-        if self._actions is None:
-            actions = dict()
-            actions[17] = self.WS_action 
-            self._actions = actions
-        action = self._actions.get(ruleIndex, None)
-        if action is not None:
-            action(localctx, actionIndex)
-        else:
-            raise Exception("No registered action for:" + str(ruleIndex))
-
-
-    def WS_action(self, localctx:RuleContext , actionIndex:int):
-        if actionIndex == 0:
-             skip(); 
-     
 
 

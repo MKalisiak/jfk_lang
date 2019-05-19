@@ -9,32 +9,32 @@ import sys
 def serializedATN():
     with StringIO() as buf:
         buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\24")
-        buf.write("P\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\3\2")
+        buf.write("O\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\3\2")
         buf.write("\7\2\20\n\2\f\2\16\2\23\13\2\3\3\5\3\26\n\3\3\3\5\3\31")
-        buf.write("\n\3\3\3\3\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\5\4%\n\4")
-        buf.write("\3\4\3\4\3\4\3\4\5\4+\n\4\3\5\3\5\3\5\3\5\3\5\3\5\3\5")
-        buf.write("\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3")
-        buf.write("\5\5\5B\n\5\3\6\3\6\7\6F\n\6\f\6\16\6I\13\6\3\7\3\7\3")
-        buf.write("\7\5\7N\n\7\3\7\2\2\b\2\4\6\b\n\f\2\3\3\2\23\23\2W\2\21")
-        buf.write("\3\2\2\2\4\25\3\2\2\2\6*\3\2\2\2\bA\3\2\2\2\nC\3\2\2\2")
-        buf.write("\fM\3\2\2\2\16\20\5\4\3\2\17\16\3\2\2\2\20\23\3\2\2\2")
-        buf.write("\21\17\3\2\2\2\21\22\3\2\2\2\22\3\3\2\2\2\23\21\3\2\2")
-        buf.write("\2\24\26\5\6\4\2\25\24\3\2\2\2\25\26\3\2\2\2\26\30\3\2")
-        buf.write("\2\2\27\31\5\n\6\2\30\27\3\2\2\2\30\31\3\2\2\2\31\32\3")
-        buf.write("\2\2\2\32\33\7\23\2\2\33\5\3\2\2\2\34\35\7\20\2\2\35\36")
-        buf.write("\7\3\2\2\36\37\7\b\2\2\37+\7\4\2\2 !\7\t\2\2!$\7\5\2\2")
-        buf.write("\"%\7\17\2\2#%\5\b\5\2$\"\3\2\2\2$#\3\2\2\2%&\3\2\2\2")
-        buf.write("&+\7\6\2\2\'(\7\20\2\2()\7\3\2\2)+\5\b\5\2*\34\3\2\2\2")
-        buf.write("* \3\2\2\2*\'\3\2\2\2+\7\3\2\2\2,-\5\f\7\2-.\7\n\2\2.")
-        buf.write("/\5\b\5\2/B\3\2\2\2\60\61\5\f\7\2\61\62\7\13\2\2\62\63")
-        buf.write("\5\b\5\2\63B\3\2\2\2\64\65\5\f\7\2\65\66\7\f\2\2\66\67")
-        buf.write("\5\b\5\2\67B\3\2\2\289\5\f\7\29:\7\r\2\2:;\5\b\5\2;B\3")
-        buf.write("\2\2\2<=\5\f\7\2=>\7\16\2\2>?\5\b\5\2?B\3\2\2\2@B\5\f")
-        buf.write("\7\2A,\3\2\2\2A\60\3\2\2\2A\64\3\2\2\2A8\3\2\2\2A<\3\2")
-        buf.write("\2\2A@\3\2\2\2B\t\3\2\2\2CG\7\7\2\2DF\n\2\2\2ED\3\2\2")
-        buf.write("\2FI\3\2\2\2GE\3\2\2\2GH\3\2\2\2H\13\3\2\2\2IG\3\2\2\2")
-        buf.write("JN\7\20\2\2KN\7\22\2\2LN\7\21\2\2MJ\3\2\2\2MK\3\2\2\2")
-        buf.write("ML\3\2\2\2N\r\3\2\2\2\n\21\25\30$*AGM")
+        buf.write("\n\3\3\3\3\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3")
+        buf.write("\4\3\4\5\4)\n\4\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3")
+        buf.write("\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\5\5@\n")
+        buf.write("\5\3\6\3\6\7\6D\n\6\f\6\16\6G\13\6\3\7\3\7\3\7\3\7\5\7")
+        buf.write("M\n\7\3\7\2\2\b\2\4\6\b\n\f\2\3\3\2\23\23\2V\2\21\3\2")
+        buf.write("\2\2\4\25\3\2\2\2\6(\3\2\2\2\b?\3\2\2\2\nA\3\2\2\2\fL")
+        buf.write("\3\2\2\2\16\20\5\4\3\2\17\16\3\2\2\2\20\23\3\2\2\2\21")
+        buf.write("\17\3\2\2\2\21\22\3\2\2\2\22\3\3\2\2\2\23\21\3\2\2\2\24")
+        buf.write("\26\5\6\4\2\25\24\3\2\2\2\25\26\3\2\2\2\26\30\3\2\2\2")
+        buf.write("\27\31\5\n\6\2\30\27\3\2\2\2\30\31\3\2\2\2\31\32\3\2\2")
+        buf.write("\2\32\33\7\23\2\2\33\5\3\2\2\2\34\35\7\20\2\2\35\36\7")
+        buf.write("\3\2\2\36\37\7\b\2\2\37)\7\4\2\2 !\7\t\2\2!\"\7\5\2\2")
+        buf.write("\"#\5\b\5\2#$\7\6\2\2$)\3\2\2\2%&\7\20\2\2&\'\7\3\2\2")
+        buf.write("\')\5\b\5\2(\34\3\2\2\2( \3\2\2\2(%\3\2\2\2)\7\3\2\2\2")
+        buf.write("*+\5\f\7\2+,\7\n\2\2,-\5\b\5\2-@\3\2\2\2./\5\f\7\2/\60")
+        buf.write("\7\13\2\2\60\61\5\b\5\2\61@\3\2\2\2\62\63\5\f\7\2\63\64")
+        buf.write("\7\f\2\2\64\65\5\b\5\2\65@\3\2\2\2\66\67\5\f\7\2\678\7")
+        buf.write("\r\2\289\5\b\5\29@\3\2\2\2:;\5\f\7\2;<\7\16\2\2<=\5\b")
+        buf.write("\5\2=@\3\2\2\2>@\5\f\7\2?*\3\2\2\2?.\3\2\2\2?\62\3\2\2")
+        buf.write("\2?\66\3\2\2\2?:\3\2\2\2?>\3\2\2\2@\t\3\2\2\2AE\7\7\2")
+        buf.write("\2BD\n\2\2\2CB\3\2\2\2DG\3\2\2\2EC\3\2\2\2EF\3\2\2\2F")
+        buf.write("\13\3\2\2\2GE\3\2\2\2HM\7\20\2\2IM\7\22\2\2JM\7\21\2\2")
+        buf.write("KM\7\17\2\2LH\3\2\2\2LI\3\2\2\2LJ\3\2\2\2LK\3\2\2\2M\r")
+        buf.write("\3\2\2\2\t\21\25\30(?EL")
         return buf.getvalue()
 
 
@@ -237,8 +237,6 @@ class JFKParser ( Parser ):
 
         def OUTPUT(self):
             return self.getToken(JFKParser.OUTPUT, 0)
-        def STRING(self):
-            return self.getToken(JFKParser.STRING, 0)
         def expression(self):
             return self.getTypedRuleContext(JFKParser.ExpressionContext,0)
 
@@ -299,9 +297,9 @@ class JFKParser ( Parser ):
         localctx = JFKParser.StatementContext(self, self._ctx, self.state)
         self.enterRule(localctx, 4, self.RULE_statement)
         try:
-            self.state = 40
+            self.state = 38
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,4,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,3,self._ctx)
             if la_ == 1:
                 localctx = JFKParser.InputContext(self, localctx)
                 self.enterOuterAlt(localctx, 1)
@@ -322,32 +320,20 @@ class JFKParser ( Parser ):
                 self.match(JFKParser.OUTPUT)
                 self.state = 31
                 self.match(JFKParser.T__2)
-                self.state = 34
-                self._errHandler.sync(self)
-                token = self._input.LA(1)
-                if token in [JFKParser.STRING]:
-                    self.state = 32
-                    self.match(JFKParser.STRING)
-                    pass
-                elif token in [JFKParser.ID, JFKParser.FLOAT, JFKParser.INT]:
-                    self.state = 33
-                    self.expression()
-                    pass
-                else:
-                    raise NoViableAltException(self)
-
-                self.state = 36
+                self.state = 32
+                self.expression()
+                self.state = 33
                 self.match(JFKParser.T__3)
                 pass
 
             elif la_ == 3:
                 localctx = JFKParser.AssignContext(self, localctx)
                 self.enterOuterAlt(localctx, 3)
-                self.state = 37
+                self.state = 35
                 self.match(JFKParser.ID)
-                self.state = 38
+                self.state = 36
                 self.match(JFKParser.T__0)
-                self.state = 39
+                self.state = 37
                 self.expression()
                 pass
 
@@ -522,68 +508,68 @@ class JFKParser ( Parser ):
         localctx = JFKParser.ExpressionContext(self, self._ctx, self.state)
         self.enterRule(localctx, 6, self.RULE_expression)
         try:
-            self.state = 63
+            self.state = 61
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,5,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,4,self._ctx)
             if la_ == 1:
                 localctx = JFKParser.AddContext(self, localctx)
                 self.enterOuterAlt(localctx, 1)
-                self.state = 42
+                self.state = 40
                 self.value()
-                self.state = 43
+                self.state = 41
                 self.match(JFKParser.ADD)
-                self.state = 44
+                self.state = 42
                 self.expression()
                 pass
 
             elif la_ == 2:
                 localctx = JFKParser.SubContext(self, localctx)
                 self.enterOuterAlt(localctx, 2)
-                self.state = 46
+                self.state = 44
                 self.value()
-                self.state = 47
+                self.state = 45
                 self.match(JFKParser.SUB)
-                self.state = 48
+                self.state = 46
                 self.expression()
                 pass
 
             elif la_ == 3:
                 localctx = JFKParser.MulContext(self, localctx)
                 self.enterOuterAlt(localctx, 3)
-                self.state = 50
+                self.state = 48
                 self.value()
-                self.state = 51
+                self.state = 49
                 self.match(JFKParser.MUL)
-                self.state = 52
+                self.state = 50
                 self.expression()
                 pass
 
             elif la_ == 4:
                 localctx = JFKParser.DivContext(self, localctx)
                 self.enterOuterAlt(localctx, 4)
-                self.state = 54
+                self.state = 52
                 self.value()
-                self.state = 55
+                self.state = 53
                 self.match(JFKParser.DIV)
-                self.state = 56
+                self.state = 54
                 self.expression()
                 pass
 
             elif la_ == 5:
                 localctx = JFKParser.ModContext(self, localctx)
                 self.enterOuterAlt(localctx, 5)
-                self.state = 58
+                self.state = 56
                 self.value()
-                self.state = 59
+                self.state = 57
                 self.match(JFKParser.MOD)
-                self.state = 60
+                self.state = 58
                 self.expression()
                 pass
 
             elif la_ == 6:
                 localctx = JFKParser.SingleContext(self, localctx)
                 self.enterOuterAlt(localctx, 6)
-                self.state = 62
+                self.state = 60
                 self.value()
                 pass
 
@@ -630,20 +616,20 @@ class JFKParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 65
+            self.state = 63
             self.match(JFKParser.T__4)
-            self.state = 69
+            self.state = 67
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << JFKParser.T__0) | (1 << JFKParser.T__1) | (1 << JFKParser.T__2) | (1 << JFKParser.T__3) | (1 << JFKParser.T__4) | (1 << JFKParser.INPUT) | (1 << JFKParser.OUTPUT) | (1 << JFKParser.ADD) | (1 << JFKParser.SUB) | (1 << JFKParser.MUL) | (1 << JFKParser.DIV) | (1 << JFKParser.MOD) | (1 << JFKParser.STRING) | (1 << JFKParser.ID) | (1 << JFKParser.FLOAT) | (1 << JFKParser.INT) | (1 << JFKParser.WS))) != 0):
-                self.state = 66
+                self.state = 64
                 _la = self._input.LA(1)
                 if _la <= 0 or _la==JFKParser.NEWLINE:
                     self._errHandler.recoverInline(self)
                 else:
                     self._errHandler.reportMatch(self)
                     self.consume()
-                self.state = 71
+                self.state = 69
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -670,6 +656,24 @@ class JFKParser ( Parser ):
         def copyFrom(self, ctx:ParserRuleContext):
             super().copyFrom(ctx)
 
+
+
+    class StringContext(ValueContext):
+
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a JFKParser.ValueContext
+            super().__init__(parser)
+            self.copyFrom(ctx)
+
+        def STRING(self):
+            return self.getToken(JFKParser.STRING, 0)
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterString" ):
+                listener.enterString(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitString" ):
+                listener.exitString(self)
 
 
     class IdContext(ValueContext):
@@ -732,26 +736,32 @@ class JFKParser ( Parser ):
         localctx = JFKParser.ValueContext(self, self._ctx, self.state)
         self.enterRule(localctx, 10, self.RULE_value)
         try:
-            self.state = 75
+            self.state = 74
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [JFKParser.ID]:
                 localctx = JFKParser.IdContext(self, localctx)
                 self.enterOuterAlt(localctx, 1)
-                self.state = 72
+                self.state = 70
                 self.match(JFKParser.ID)
                 pass
             elif token in [JFKParser.INT]:
                 localctx = JFKParser.IntContext(self, localctx)
                 self.enterOuterAlt(localctx, 2)
-                self.state = 73
+                self.state = 71
                 self.match(JFKParser.INT)
                 pass
             elif token in [JFKParser.FLOAT]:
                 localctx = JFKParser.FloatContext(self, localctx)
                 self.enterOuterAlt(localctx, 3)
-                self.state = 74
+                self.state = 72
                 self.match(JFKParser.FLOAT)
+                pass
+            elif token in [JFKParser.STRING]:
+                localctx = JFKParser.StringContext(self, localctx)
+                self.enterOuterAlt(localctx, 4)
+                self.state = 73
+                self.match(JFKParser.STRING)
                 pass
             else:
                 raise NoViableAltException(self)

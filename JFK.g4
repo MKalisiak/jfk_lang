@@ -6,9 +6,9 @@ program: line*
 line:   statement? comment? NEWLINE 
     ;
 
-statement:	  ID '=' INPUT '()'                     #input
-	        | OUTPUT '(' (STRING | expression) ')'  #output
-	        | ID '=' expression		                #assign
+statement:	  ID '=' INPUT '()'              #input
+	        | OUTPUT '(' expression ')'      #output
+	        | ID '=' expression		         #assign
    ;
 
 expression:   value ADD expression	#add
@@ -25,6 +25,7 @@ comment:    '#' (~(NEWLINE))*
 value:   ID     #id
        | INT    #int
        | FLOAT  #float
+       | STRING #string
    ;
 
 INPUT:  'input'
@@ -63,7 +64,7 @@ INT:   DIGIT+
 NEWLINE:	'\r'? '\n'
     ;
 
-WS:   (' '|'\t')+ { skip(); }
+WS:   (' '|'\t')+ -> skip
     ;
 
 fragment DIGIT: '0'..'9' ;

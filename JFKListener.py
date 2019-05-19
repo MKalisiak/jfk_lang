@@ -143,3 +143,12 @@ class JFKListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by JFKParser#string.
+    def enterString(self, ctx:JFKParser.StringContext):
+        pass
+
+    # Exit a parse tree produced by JFKParser#string.
+    def exitString(self, ctx:JFKParser.StringContext):
+        pass
+
+
