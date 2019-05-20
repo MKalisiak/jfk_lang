@@ -7,7 +7,7 @@ from LLVMActions import LLVMActions
 
 
 def main(argv):
-    file_stream = FileStream(argv[1])
+    file_stream = FileStream(argv[1], encoding='utf-8')
     lexer = JFKLexer(file_stream)
     tokens = CommonTokenStream(lexer)
     parser = JFKParser(tokens)

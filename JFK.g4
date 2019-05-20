@@ -6,27 +6,30 @@ program: line*
 line:   statement? comment? NEWLINE 
     ;
 
-statement:	  ID '=' INPUT '()'              #input
-	        | OUTPUT '(' expression ')'      #output
-	        | ID '=' expression		         #assign
+statement:	  OUTPUT '(' expression ')'         #output
+	        | ID '=' expression		            #assign
    ;
 
-expression:   value			        #single
-            | expression ADD value  #add
-            | expression SUB value 	#sub
-            | expression MUL value  #mul
-            | expression DIV value  #div
-            | expression MOD value	#mod
+expression:   value			             #single
+            | expression ADD value       #add
+            | expression SUB value 	     #sub
+            | expression MUL value       #mul
+            | expression DIV value       #div
+            | expression MOD value	     #mod
    ;
 
 comment:    '#' (~(NEWLINE))*
     ;
 
-value:   ID     #id
-       | INT    #int
-       | FLOAT  #float
-       | STRING #string
+value:   ID                         #id
+       | INT                        #int
+       | FLOAT                      #float
+       | STRING                     #string
+       | INPUT '(' TYPE_KEYWORD ')' #input
    ;
+
+TYPE_KEYWORD: 'int' | 'float' | 'string'
+    ;
 
 INPUT:  'input'
     ;

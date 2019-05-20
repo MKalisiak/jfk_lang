@@ -11,30 +11,30 @@ def serializedATN():
         buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\24")
         buf.write("O\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\3\2")
         buf.write("\7\2\20\n\2\f\2\16\2\23\13\2\3\3\5\3\26\n\3\3\3\5\3\31")
-        buf.write("\n\3\3\3\3\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3")
-        buf.write("\4\3\4\5\4)\n\4\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3")
-        buf.write("\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\7\5=\n\5\f\5\16\5@")
-        buf.write("\13\5\3\6\3\6\7\6D\n\6\f\6\16\6G\13\6\3\7\3\7\3\7\3\7")
-        buf.write("\5\7M\n\7\3\7\2\3\b\b\2\4\6\b\n\f\2\3\3\2\23\23\2V\2\21")
-        buf.write("\3\2\2\2\4\25\3\2\2\2\6(\3\2\2\2\b*\3\2\2\2\nA\3\2\2\2")
+        buf.write("\n\3\3\3\3\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\5\4%\n\4")
+        buf.write("\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3")
+        buf.write("\5\3\5\3\5\3\5\3\5\7\59\n\5\f\5\16\5<\13\5\3\6\3\6\7\6")
+        buf.write("@\n\6\f\6\16\6C\13\6\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\5")
+        buf.write("\7M\n\7\3\7\2\3\b\b\2\4\6\b\n\f\2\3\3\2\23\23\2V\2\21")
+        buf.write("\3\2\2\2\4\25\3\2\2\2\6$\3\2\2\2\b&\3\2\2\2\n=\3\2\2\2")
         buf.write("\fL\3\2\2\2\16\20\5\4\3\2\17\16\3\2\2\2\20\23\3\2\2\2")
         buf.write("\21\17\3\2\2\2\21\22\3\2\2\2\22\3\3\2\2\2\23\21\3\2\2")
         buf.write("\2\24\26\5\6\4\2\25\24\3\2\2\2\25\26\3\2\2\2\26\30\3\2")
         buf.write("\2\2\27\31\5\n\6\2\30\27\3\2\2\2\30\31\3\2\2\2\31\32\3")
-        buf.write("\2\2\2\32\33\7\23\2\2\33\5\3\2\2\2\34\35\7\20\2\2\35\36")
-        buf.write("\7\3\2\2\36\37\7\b\2\2\37)\7\4\2\2 !\7\t\2\2!\"\7\5\2")
-        buf.write("\2\"#\5\b\5\2#$\7\6\2\2$)\3\2\2\2%&\7\20\2\2&\'\7\3\2")
-        buf.write("\2\')\5\b\5\2(\34\3\2\2\2( \3\2\2\2(%\3\2\2\2)\7\3\2\2")
-        buf.write("\2*+\b\5\1\2+,\5\f\7\2,>\3\2\2\2-.\f\7\2\2./\7\n\2\2/")
-        buf.write("=\5\f\7\2\60\61\f\6\2\2\61\62\7\13\2\2\62=\5\f\7\2\63")
-        buf.write("\64\f\5\2\2\64\65\7\f\2\2\65=\5\f\7\2\66\67\f\4\2\2\67")
-        buf.write("8\7\r\2\28=\5\f\7\29:\f\3\2\2:;\7\16\2\2;=\5\f\7\2<-\3")
-        buf.write("\2\2\2<\60\3\2\2\2<\63\3\2\2\2<\66\3\2\2\2<9\3\2\2\2=")
-        buf.write("@\3\2\2\2><\3\2\2\2>?\3\2\2\2?\t\3\2\2\2@>\3\2\2\2AE\7")
-        buf.write("\7\2\2BD\n\2\2\2CB\3\2\2\2DG\3\2\2\2EC\3\2\2\2EF\3\2\2")
-        buf.write("\2F\13\3\2\2\2GE\3\2\2\2HM\7\20\2\2IM\7\22\2\2JM\7\21")
-        buf.write("\2\2KM\7\17\2\2LH\3\2\2\2LI\3\2\2\2LJ\3\2\2\2LK\3\2\2")
-        buf.write("\2M\r\3\2\2\2\n\21\25\30(<>EL")
+        buf.write("\2\2\2\32\33\7\23\2\2\33\5\3\2\2\2\34\35\7\t\2\2\35\36")
+        buf.write("\7\3\2\2\36\37\5\b\5\2\37 \7\4\2\2 %\3\2\2\2!\"\7\20\2")
+        buf.write("\2\"#\7\5\2\2#%\5\b\5\2$\34\3\2\2\2$!\3\2\2\2%\7\3\2\2")
+        buf.write("\2&\'\b\5\1\2\'(\5\f\7\2(:\3\2\2\2)*\f\7\2\2*+\7\n\2\2")
+        buf.write("+9\5\f\7\2,-\f\6\2\2-.\7\13\2\2.9\5\f\7\2/\60\f\5\2\2")
+        buf.write("\60\61\7\f\2\2\619\5\f\7\2\62\63\f\4\2\2\63\64\7\r\2\2")
+        buf.write("\649\5\f\7\2\65\66\f\3\2\2\66\67\7\16\2\2\679\5\f\7\2")
+        buf.write("8)\3\2\2\28,\3\2\2\28/\3\2\2\28\62\3\2\2\28\65\3\2\2\2")
+        buf.write("9<\3\2\2\2:8\3\2\2\2:;\3\2\2\2;\t\3\2\2\2<:\3\2\2\2=A")
+        buf.write("\7\6\2\2>@\n\2\2\2?>\3\2\2\2@C\3\2\2\2A?\3\2\2\2AB\3\2")
+        buf.write("\2\2B\13\3\2\2\2CA\3\2\2\2DM\7\20\2\2EM\7\22\2\2FM\7\21")
+        buf.write("\2\2GM\7\17\2\2HI\7\b\2\2IJ\7\3\2\2JK\7\7\2\2KM\7\4\2")
+        buf.write("\2LD\3\2\2\2LE\3\2\2\2LF\3\2\2\2LG\3\2\2\2LH\3\2\2\2M")
+        buf.write("\r\3\2\2\2\n\21\25\30$8:AL")
         return buf.getvalue()
 
 
@@ -48,11 +48,12 @@ class JFKParser ( Parser ):
 
     sharedContextCache = PredictionContextCache()
 
-    literalNames = [ "<INVALID>", "'='", "'()'", "'('", "')'", "'#'", "'input'", 
-                     "'output'", "'+'", "'-'", "'*'", "'/'", "'%'" ]
+    literalNames = [ "<INVALID>", "'('", "')'", "'='", "'#'", "<INVALID>", 
+                     "'input'", "'output'", "'+'", "'-'", "'*'", "'/'", 
+                     "'%'" ]
 
     symbolicNames = [ "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                      "<INVALID>", "<INVALID>", "INPUT", "OUTPUT", "ADD", 
+                      "<INVALID>", "TYPE_KEYWORD", "INPUT", "OUTPUT", "ADD", 
                       "SUB", "MUL", "DIV", "MOD", "STRING", "ID", "FLOAT", 
                       "INT", "NEWLINE", "WS" ]
 
@@ -71,7 +72,7 @@ class JFKParser ( Parser ):
     T__1=2
     T__2=3
     T__3=4
-    T__4=5
+    TYPE_KEYWORD=5
     INPUT=6
     OUTPUT=7
     ADD=8
@@ -132,7 +133,7 @@ class JFKParser ( Parser ):
             self.state = 15
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << JFKParser.T__4) | (1 << JFKParser.OUTPUT) | (1 << JFKParser.ID) | (1 << JFKParser.NEWLINE))) != 0):
+            while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << JFKParser.T__3) | (1 << JFKParser.OUTPUT) | (1 << JFKParser.ID) | (1 << JFKParser.NEWLINE))) != 0):
                 self.state = 12
                 self.line()
                 self.state = 17
@@ -197,7 +198,7 @@ class JFKParser ( Parser ):
             self.state = 22
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==JFKParser.T__4:
+            if _la==JFKParser.T__3:
                 self.state = 21
                 self.comment()
 
@@ -250,26 +251,6 @@ class JFKParser ( Parser ):
                 listener.exitOutput(self)
 
 
-    class InputContext(StatementContext):
-
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a JFKParser.StatementContext
-            super().__init__(parser)
-            self.copyFrom(ctx)
-
-        def ID(self):
-            return self.getToken(JFKParser.ID, 0)
-        def INPUT(self):
-            return self.getToken(JFKParser.INPUT, 0)
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterInput" ):
-                listener.enterInput(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitInput" ):
-                listener.exitInput(self)
-
-
     class AssignContext(StatementContext):
 
         def __init__(self, parser, ctx:ParserRuleContext): # actually a JFKParser.StatementContext
@@ -297,46 +278,33 @@ class JFKParser ( Parser ):
         localctx = JFKParser.StatementContext(self, self._ctx, self.state)
         self.enterRule(localctx, 4, self.RULE_statement)
         try:
-            self.state = 38
+            self.state = 34
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,3,self._ctx)
-            if la_ == 1:
-                localctx = JFKParser.InputContext(self, localctx)
+            token = self._input.LA(1)
+            if token in [JFKParser.OUTPUT]:
+                localctx = JFKParser.OutputContext(self, localctx)
                 self.enterOuterAlt(localctx, 1)
                 self.state = 26
-                self.match(JFKParser.ID)
+                self.match(JFKParser.OUTPUT)
                 self.state = 27
                 self.match(JFKParser.T__0)
                 self.state = 28
-                self.match(JFKParser.INPUT)
+                self.expression(0)
                 self.state = 29
                 self.match(JFKParser.T__1)
                 pass
-
-            elif la_ == 2:
-                localctx = JFKParser.OutputContext(self, localctx)
-                self.enterOuterAlt(localctx, 2)
-                self.state = 30
-                self.match(JFKParser.OUTPUT)
-                self.state = 31
-                self.match(JFKParser.T__2)
-                self.state = 32
-                self.expression(0)
-                self.state = 33
-                self.match(JFKParser.T__3)
-                pass
-
-            elif la_ == 3:
+            elif token in [JFKParser.ID]:
                 localctx = JFKParser.AssignContext(self, localctx)
-                self.enterOuterAlt(localctx, 3)
-                self.state = 35
+                self.enterOuterAlt(localctx, 2)
+                self.state = 31
                 self.match(JFKParser.ID)
-                self.state = 36
-                self.match(JFKParser.T__0)
-                self.state = 37
+                self.state = 32
+                self.match(JFKParser.T__2)
+                self.state = 33
                 self.expression(0)
                 pass
-
+            else:
+                raise NoViableAltException(self)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -515,10 +483,10 @@ class JFKParser ( Parser ):
             self._ctx = localctx
             _prevctx = localctx
 
-            self.state = 41
+            self.state = 37
             self.value()
             self._ctx.stop = self._input.LT(-1)
-            self.state = 60
+            self.state = 56
             self._errHandler.sync(self)
             _alt = self._interp.adaptivePredict(self._input,5,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
@@ -526,76 +494,76 @@ class JFKParser ( Parser ):
                     if self._parseListeners is not None:
                         self.triggerExitRuleEvent()
                     _prevctx = localctx
-                    self.state = 58
+                    self.state = 54
                     self._errHandler.sync(self)
                     la_ = self._interp.adaptivePredict(self._input,4,self._ctx)
                     if la_ == 1:
                         localctx = JFKParser.AddContext(self, JFKParser.ExpressionContext(self, _parentctx, _parentState))
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expression)
-                        self.state = 43
+                        self.state = 39
                         if not self.precpred(self._ctx, 5):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 5)")
-                        self.state = 44
+                        self.state = 40
                         self.match(JFKParser.ADD)
-                        self.state = 45
+                        self.state = 41
                         self.value()
                         pass
 
                     elif la_ == 2:
                         localctx = JFKParser.SubContext(self, JFKParser.ExpressionContext(self, _parentctx, _parentState))
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expression)
-                        self.state = 46
+                        self.state = 42
                         if not self.precpred(self._ctx, 4):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 4)")
-                        self.state = 47
+                        self.state = 43
                         self.match(JFKParser.SUB)
-                        self.state = 48
+                        self.state = 44
                         self.value()
                         pass
 
                     elif la_ == 3:
                         localctx = JFKParser.MulContext(self, JFKParser.ExpressionContext(self, _parentctx, _parentState))
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expression)
-                        self.state = 49
+                        self.state = 45
                         if not self.precpred(self._ctx, 3):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 3)")
-                        self.state = 50
+                        self.state = 46
                         self.match(JFKParser.MUL)
-                        self.state = 51
+                        self.state = 47
                         self.value()
                         pass
 
                     elif la_ == 4:
                         localctx = JFKParser.DivContext(self, JFKParser.ExpressionContext(self, _parentctx, _parentState))
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expression)
-                        self.state = 52
+                        self.state = 48
                         if not self.precpred(self._ctx, 2):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 2)")
-                        self.state = 53
+                        self.state = 49
                         self.match(JFKParser.DIV)
-                        self.state = 54
+                        self.state = 50
                         self.value()
                         pass
 
                     elif la_ == 5:
                         localctx = JFKParser.ModContext(self, JFKParser.ExpressionContext(self, _parentctx, _parentState))
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expression)
-                        self.state = 55
+                        self.state = 51
                         if not self.precpred(self._ctx, 1):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 1)")
-                        self.state = 56
+                        self.state = 52
                         self.match(JFKParser.MOD)
-                        self.state = 57
+                        self.state = 53
                         self.value()
                         pass
 
              
-                self.state = 62
+                self.state = 58
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,5,self._ctx)
 
@@ -641,20 +609,20 @@ class JFKParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
+            self.state = 59
+            self.match(JFKParser.T__3)
             self.state = 63
-            self.match(JFKParser.T__4)
-            self.state = 67
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << JFKParser.T__0) | (1 << JFKParser.T__1) | (1 << JFKParser.T__2) | (1 << JFKParser.T__3) | (1 << JFKParser.T__4) | (1 << JFKParser.INPUT) | (1 << JFKParser.OUTPUT) | (1 << JFKParser.ADD) | (1 << JFKParser.SUB) | (1 << JFKParser.MUL) | (1 << JFKParser.DIV) | (1 << JFKParser.MOD) | (1 << JFKParser.STRING) | (1 << JFKParser.ID) | (1 << JFKParser.FLOAT) | (1 << JFKParser.INT) | (1 << JFKParser.WS))) != 0):
-                self.state = 64
+            while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << JFKParser.T__0) | (1 << JFKParser.T__1) | (1 << JFKParser.T__2) | (1 << JFKParser.T__3) | (1 << JFKParser.TYPE_KEYWORD) | (1 << JFKParser.INPUT) | (1 << JFKParser.OUTPUT) | (1 << JFKParser.ADD) | (1 << JFKParser.SUB) | (1 << JFKParser.MUL) | (1 << JFKParser.DIV) | (1 << JFKParser.MOD) | (1 << JFKParser.STRING) | (1 << JFKParser.ID) | (1 << JFKParser.FLOAT) | (1 << JFKParser.INT) | (1 << JFKParser.WS))) != 0):
+                self.state = 60
                 _la = self._input.LA(1)
                 if _la <= 0 or _la==JFKParser.NEWLINE:
                     self._errHandler.recoverInline(self)
                 else:
                     self._errHandler.reportMatch(self)
                     self.consume()
-                self.state = 69
+                self.state = 65
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -681,6 +649,26 @@ class JFKParser ( Parser ):
         def copyFrom(self, ctx:ParserRuleContext):
             super().copyFrom(ctx)
 
+
+
+    class InputContext(ValueContext):
+
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a JFKParser.ValueContext
+            super().__init__(parser)
+            self.copyFrom(ctx)
+
+        def INPUT(self):
+            return self.getToken(JFKParser.INPUT, 0)
+        def TYPE_KEYWORD(self):
+            return self.getToken(JFKParser.TYPE_KEYWORD, 0)
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterInput" ):
+                listener.enterInput(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitInput" ):
+                listener.exitInput(self)
 
 
     class StringContext(ValueContext):
@@ -767,26 +755,38 @@ class JFKParser ( Parser ):
             if token in [JFKParser.ID]:
                 localctx = JFKParser.IdContext(self, localctx)
                 self.enterOuterAlt(localctx, 1)
-                self.state = 70
+                self.state = 66
                 self.match(JFKParser.ID)
                 pass
             elif token in [JFKParser.INT]:
                 localctx = JFKParser.IntContext(self, localctx)
                 self.enterOuterAlt(localctx, 2)
-                self.state = 71
+                self.state = 67
                 self.match(JFKParser.INT)
                 pass
             elif token in [JFKParser.FLOAT]:
                 localctx = JFKParser.FloatContext(self, localctx)
                 self.enterOuterAlt(localctx, 3)
-                self.state = 72
+                self.state = 68
                 self.match(JFKParser.FLOAT)
                 pass
             elif token in [JFKParser.STRING]:
                 localctx = JFKParser.StringContext(self, localctx)
                 self.enterOuterAlt(localctx, 4)
-                self.state = 73
+                self.state = 69
                 self.match(JFKParser.STRING)
+                pass
+            elif token in [JFKParser.INPUT]:
+                localctx = JFKParser.InputContext(self, localctx)
+                self.enterOuterAlt(localctx, 5)
+                self.state = 70
+                self.match(JFKParser.INPUT)
+                self.state = 71
+                self.match(JFKParser.T__0)
+                self.state = 72
+                self.match(JFKParser.TYPE_KEYWORD)
+                self.state = 73
+                self.match(JFKParser.T__1)
                 pass
             else:
                 raise NoViableAltException(self)

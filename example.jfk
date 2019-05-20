@@ -1,19 +1,43 @@
-# comment
+output("Obsługa dwóch typów zmiennych: całkowite i rzeczywiste:")
+output(1)
+output(8.7)
 
-a = -1
-b = 2
-c = 3
+output("a = 89.21, poniżej output(a)")
+a = 89.21
+output(a)
+
+output("")
+output("Obsługa podstawowych operacji arytmetycznych:")
+output("29 + 98.1 = ")
+output(29 + 98.1)
+
+output("")
+a = 29.0
+b = 8
+c = 2
 d = 4
+e = 7.2
+output("a = 29.0, b = 8, c = 2, d = 4, e = 7.2")
+output("a - b + c * d / e = ")
+output(a - b + c * d / e)
 
-output(d - c - b - a)
+output("")
+output("7.8 % 4 = ")
+output(7.8 % 4)
 
-output(d + c + b + a)
+output("")
+output("Obsługa typu ciąg znaków (string)")
+foo = "bar"
+output(foo)
 
-output(d * c * b * a)
+output("")
+output("Podstawowa obsługa standardowego wejścia i wyjścia")
+output("Podaj swoj rok urodzenia:")
 
-output(d + c - b * a / 2.0)
+age = 2019 - input(int)
+output("Twój wiek to:")
+output(age)
 
-output(9 % 4)
-output(9 % 4.1)
-output(9.0 % 4.1)
-output(9.1337 % 4)
+
+output("Echo: ")
+output(input(string))

@@ -5,6 +5,6 @@ Value = namedtuple("Value", ["name", "type", "is_id"])
 
 
 class VarType(Enum):
-    INT = 1
-    FLOAT = 2
-    STRING = 3
+    INT = "int"
+    FLOAT = "float"
+    STRING = "string"

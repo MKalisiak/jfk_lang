@@ -142,6 +142,21 @@ class LLVMActions(JFKListener):
 
         self.variables[ID] = value.type
 
+    def exitInput(self, ctx: JFKParser.InputContext):
+        TYPE = ctx.TYPE_KEYWORD().getText()
+
+        if TYPE == VarType.INT.value:
+            self.generator.input_i32()
+        elif TYPE == VarType.FLOAT.value:
+            self.generator.input_double()
+        elif TYPE == VarType.STRING.value:
+            self.generator.input_string()
+
+        if TYPE == VarType.STRING.value:
+            self.stack.append(Value(str(self.generator.str_i - 4), VarType(TYPE), True))
+        else:
+            self.stack.append(Value("%" + str(self.generator.str_i - 1), VarType(TYPE), False))
+
     def error(self, line: int, msg: str):
         print("Error, line " + str(line) + ", " + msg, file=sys.stderr)
         exit(1)
