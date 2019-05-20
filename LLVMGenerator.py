@@ -331,9 +331,6 @@ class LLVMGenerator:
         self.str_i += 1
         self.load_double(self.prev_str(2))
 
-    # TODO: assign id string
-    # Znaki specjalne w stringu
-
     def input_string(self, max_length=256):
         self.main_text += "%" + self.reg + " = alloca i8*\n"
         self.str_i += 1
@@ -344,10 +341,6 @@ class LLVMGenerator:
         self.str_i += 1
         self.main_text += f"%{self.reg} = call i32 (i8*, ...) @__isoc99_scanf(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @strs, i32 0, i32 0), i8* %{self.prev_str()})\n"
         self.str_i += 1
-
-    """
-    mamy zapisanego consta, wiec wystarczy go załadować to nowej zmiennej. Mozna wyrzucic strcpy - może XD
-    """
 
     def generate(self):
         text = "declare i32 @printf(i8*, ...)\n"
