@@ -16,7 +16,6 @@ class LLVMActions(JFKListener):
         self.variables = dict()
 
     def exitOutput(self, ctx: JFKParser.OutputContext):
-        print(self.stack, file=sys.stderr)
         value = self.stack.pop()  # type: Value
 
         if value.is_id:
@@ -180,8 +179,6 @@ class LLVMActions(JFKListener):
         return v1, v2
 
     def calc(self, op_name, v1, v2):
-        print(self.stack, file=sys.stderr)
-
         v1, v2 = v2, v1
 
         if v1.type != v2.type:
