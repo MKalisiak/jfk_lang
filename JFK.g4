@@ -11,12 +11,12 @@ statement:	  ID '=' INPUT '()'              #input
 	        | ID '=' expression		         #assign
    ;
 
-expression:   value ADD expression	#add
-            | value SUB expression	#sub
-            | value MUL expression	#mul
-            | value DIV expression	#div
-            | value MOD expression	#mod
-	        | value			        #single
+expression:   value			        #single
+            | expression ADD value  #add
+            | expression SUB value 	#sub
+            | expression MUL value  #mul
+            | expression DIV value  #div
+            | expression MOD value	#mod
    ;
 
 comment:    '#' (~(NEWLINE))*
@@ -49,16 +49,16 @@ DIV:    '/'
 MOD:    '%'
     ;
 
-STRING :  '"' ( ~('\\'|'"') )* '"'
+STRING :  '"' ( ~('"') )* '"'
     ;
 
 ID:   ('a'..'z'|'A'..'Z'|'_')+ ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*
     ;
 
-FLOAT: DIGIT+ '.' DIGIT*
+FLOAT: '-'? DIGIT+ '.' DIGIT*
     ;
 
-INT:   DIGIT+
+INT:   '-'? DIGIT+
     ;
 
 NEWLINE:	'\r'? '\n'

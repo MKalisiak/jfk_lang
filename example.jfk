@@ -1,21 +1,19 @@
 # comment
-#a = 5.4
-#
-#b = 7
-#
-#c = "Test"
-#output(c)
-#c = "dadsad"
-#output(b)
-#output("Dziala")
-#output(12)
-#
-#output(3.14)
-#output(c)
-#output(a)
 
-a = 6.66
-b = a
-output(b)
+a = -1
+b = 2
+c = 3
+d = 4
 
-output(a)
+output(d - c - b - a)
+
+output(d + c + b + a)
+
+output(d * c * b * a)
+
+output(d + c - b * a / 2.0)
+
+output(9 % 4)
+output(9 % 4.1)
+output(9.0 % 4.1)
+output(9.1337 % 4)

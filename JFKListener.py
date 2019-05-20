@@ -53,30 +53,21 @@ class JFKListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by JFKParser#single.
+    def enterSingle(self, ctx:JFKParser.SingleContext):
+        pass
+
+    # Exit a parse tree produced by JFKParser#single.
+    def exitSingle(self, ctx:JFKParser.SingleContext):
+        pass
+
+
     # Enter a parse tree produced by JFKParser#add.
     def enterAdd(self, ctx:JFKParser.AddContext):
         pass
 
     # Exit a parse tree produced by JFKParser#add.
     def exitAdd(self, ctx:JFKParser.AddContext):
-        pass
-
-
-    # Enter a parse tree produced by JFKParser#sub.
-    def enterSub(self, ctx:JFKParser.SubContext):
-        pass
-
-    # Exit a parse tree produced by JFKParser#sub.
-    def exitSub(self, ctx:JFKParser.SubContext):
-        pass
-
-
-    # Enter a parse tree produced by JFKParser#mul.
-    def enterMul(self, ctx:JFKParser.MulContext):
-        pass
-
-    # Exit a parse tree produced by JFKParser#mul.
-    def exitMul(self, ctx:JFKParser.MulContext):
         pass
 
 
@@ -89,6 +80,15 @@ class JFKListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by JFKParser#sub.
+    def enterSub(self, ctx:JFKParser.SubContext):
+        pass
+
+    # Exit a parse tree produced by JFKParser#sub.
+    def exitSub(self, ctx:JFKParser.SubContext):
+        pass
+
+
     # Enter a parse tree produced by JFKParser#mod.
     def enterMod(self, ctx:JFKParser.ModContext):
         pass
@@ -98,12 +98,12 @@ class JFKListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by JFKParser#single.
-    def enterSingle(self, ctx:JFKParser.SingleContext):
+    # Enter a parse tree produced by JFKParser#mul.
+    def enterMul(self, ctx:JFKParser.MulContext):
         pass
 
-    # Exit a parse tree produced by JFKParser#single.
-    def exitSingle(self, ctx:JFKParser.SingleContext):
+    # Exit a parse tree produced by JFKParser#mul.
+    def exitMul(self, ctx:JFKParser.MulContext):
         pass
 
 
