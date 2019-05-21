@@ -17,6 +17,42 @@ class JFKListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by JFKParser#ifStmt.
+    def enterIfStmt(self, ctx:JFKParser.IfStmtContext):
+        pass
+
+    # Exit a parse tree produced by JFKParser#ifStmt.
+    def exitIfStmt(self, ctx:JFKParser.IfStmtContext):
+        pass
+
+
+    # Enter a parse tree produced by JFKParser#func.
+    def enterFunc(self, ctx:JFKParser.FuncContext):
+        pass
+
+    # Exit a parse tree produced by JFKParser#func.
+    def exitFunc(self, ctx:JFKParser.FuncContext):
+        pass
+
+
+    # Enter a parse tree produced by JFKParser#params.
+    def enterParams(self, ctx:JFKParser.ParamsContext):
+        pass
+
+    # Exit a parse tree produced by JFKParser#params.
+    def exitParams(self, ctx:JFKParser.ParamsContext):
+        pass
+
+
+    # Enter a parse tree produced by JFKParser#block.
+    def enterBlock(self, ctx:JFKParser.BlockContext):
+        pass
+
+    # Exit a parse tree produced by JFKParser#block.
+    def exitBlock(self, ctx:JFKParser.BlockContext):
+        pass
+
+
     # Enter a parse tree produced by JFKParser#line.
     def enterLine(self, ctx:JFKParser.LineContext):
         pass
@@ -41,6 +77,24 @@ class JFKListener(ParseTreeListener):
 
     # Exit a parse tree produced by JFKParser#assign.
     def exitAssign(self, ctx:JFKParser.AssignContext):
+        pass
+
+
+    # Enter a parse tree produced by JFKParser#return.
+    def enterReturn(self, ctx:JFKParser.ReturnContext):
+        pass
+
+    # Exit a parse tree produced by JFKParser#return.
+    def exitReturn(self, ctx:JFKParser.ReturnContext):
+        pass
+
+
+    # Enter a parse tree produced by JFKParser#expressionStmt.
+    def enterExpressionStmt(self, ctx:JFKParser.ExpressionStmtContext):
+        pass
+
+    # Exit a parse tree produced by JFKParser#expressionStmt.
+    def exitExpressionStmt(self, ctx:JFKParser.ExpressionStmtContext):
         pass
 
 
@@ -149,6 +203,24 @@ class JFKListener(ParseTreeListener):
 
     # Exit a parse tree produced by JFKParser#input.
     def exitInput(self, ctx:JFKParser.InputContext):
+        pass
+
+
+    # Enter a parse tree produced by JFKParser#functionCall.
+    def enterFunctionCall(self, ctx:JFKParser.FunctionCallContext):
+        pass
+
+    # Exit a parse tree produced by JFKParser#functionCall.
+    def exitFunctionCall(self, ctx:JFKParser.FunctionCallContext):
+        pass
+
+
+    # Enter a parse tree produced by JFKParser#args.
+    def enterArgs(self, ctx:JFKParser.ArgsContext):
+        pass
+
+    # Exit a parse tree produced by JFKParser#args.
+    def exitArgs(self, ctx:JFKParser.ArgsContext):
         pass
 
 

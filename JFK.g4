@@ -1,6 +1,19 @@
 grammar JFK;
 
-program: line*
+program: (line | ifStmt | func)*
+    ;
+
+ifStmt: 'if' expression 'then' block ('elif' expression 'then' block)* ('else' block)?
+    ;
+
+func: params '->' ID '->' block
+    ;
+
+params: ID (',' ID)*
+        |
+    ;
+
+block: '{' line* '}'
     ;
 
 line:   statement? comment? NEWLINE 
@@ -8,6 +21,8 @@ line:   statement? comment? NEWLINE
 
 statement:	  OUTPUT '(' expression ')'         #output
 	        | ID '=' expression		            #assign
+	        | 'return' expression               #return
+	        | expression                        #expressionStmt
    ;
 
 expression:   value			             #single
@@ -26,7 +41,12 @@ value:   ID                         #id
        | FLOAT                      #float
        | STRING                     #string
        | INPUT '(' TYPE_KEYWORD ')' #input
+       | ID '(' args ')'            #functionCall
    ;
+
+args:   expression (',' expression)*
+       |
+    ;
 
 TYPE_KEYWORD: 'int' | 'float' | 'string'
     ;

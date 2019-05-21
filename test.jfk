@@ -1,0 +1,15 @@
+if a + 2 then {
+    d = 9
+} elif c + 2 then {
+    a = 9
+} else {
+    s = 1
+}
+
+a -> sum -> {
+    return a + b
+}
+
+suma = sum(a+2, c+2, 5, input(int))
+
+output("Hello World!")
