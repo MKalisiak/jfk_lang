@@ -31,6 +31,18 @@ foo = "bar"
 output(foo)
 
 output("")
+output("Przypisanie do zmienne stringa z polskimi znakami:")
+output("nazwa_zmiennej = 'ĄĘŁÓŹĆŻ', poniżej output(nazwa_zmiennej)")
+nazwa_zmiennej = "ĄĘŁÓŹĆŻ"
+output(nazwa_zmiennej)
+
+output("Inkrementacja zmiennej")
+output("Poniżej output(b), następnie b = b + 1, a na koniec znów output(b)")
+output(b)
+b = b + 1
+output(b)
+
+output("")
 output("Podstawowa obsługa standardowego wejścia i wyjścia")
 output("Podaj swoj rok urodzenia:")
 
