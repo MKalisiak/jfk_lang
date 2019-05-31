@@ -8,3 +8,4 @@ class VarType(Enum):
     INT = "int"
     FLOAT = "float"
     STRING = "string"
+    BOOL = "bool"

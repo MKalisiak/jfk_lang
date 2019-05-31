@@ -25,6 +25,8 @@ class LLVMActions(JFKListener):
                 self.generator.output_id_double(value.name)
             if value.type == VarType.STRING:
                 self.generator.output_id_string(value.name)
+            if value.type == VarType.BOOL:
+                self.generator.output_id_bool(value.name)
         else:
             if value.type == VarType.INT:
                 self.generator.output_i32(value.name)
@@ -32,6 +34,8 @@ class LLVMActions(JFKListener):
                 self.generator.output_double(value.name)
             if value.type == VarType.STRING:
                 self.generator.output_string(value.name[1:-1])
+            if value.type == VarType.BOOL:
+                self.generator.output_bool(value.name)
 
     def exitProgram(self, ctx: JFKParser.ProgramContext):
         print(self.generator.generate())
@@ -52,6 +56,8 @@ class LLVMActions(JFKListener):
                 self.stack.append(Value(_id, VarType.FLOAT, True))
             elif var_type == VarType.STRING:
                 self.stack.append(Value(_id, VarType.STRING, True))
+            elif var_type == VarType.BOOL:
+                self.stack.append(Value(_id, VarType.BOOL, True))
         except KeyError:
             self.error(ctx.start.line, "Unresolved variable " + _id)
 
@@ -114,6 +120,7 @@ class LLVMActions(JFKListener):
         ...
 
     def exitAssign(self, ctx: JFKParser.AssignContext):
+        print(self.stack, file=sys.stderr)
         ID = ctx.ID().getText()  # type: str
         value = self.stack.pop()  # type: Value
         if value.is_id:
@@ -127,6 +134,10 @@ class LLVMActions(JFKListener):
                 self.generator.assign_id_double(ID, value.name)
             elif value.type == VarType.STRING:
                 self.generator.assign_id_string(ID, value.name)
+            elif value.type == VarType.BOOL:
+                if ID not in self.variables:
+                    self.generator.declare_bool(ID)
+                self.generator.assign_id_bool(ID, value.name)
         else:
             if value.type == VarType.INT:
                 if ID not in self.variables:
@@ -138,6 +149,10 @@ class LLVMActions(JFKListener):
                 self.generator.assign_double(ID, value.name)
             elif value.type == VarType.STRING:
                 self.generator.assign_string(ID, value.name[1:-1])
+            elif value.type == VarType.BOOL:
+                if ID not in self.variables:
+                    self.generator.declare_bool(ID)
+                self.generator.assign_bool(ID, value.name)
 
         self.variables[ID] = value.type
 
@@ -155,6 +170,14 @@ class LLVMActions(JFKListener):
             self.stack.append(Value(str(self.generator.str_i - 4), VarType(TYPE), True))
         else:
             self.stack.append(Value("%" + str(self.generator.str_i - 1), VarType(TYPE), False))
+
+    def exitTrue(self, ctx: JFKParser.TrueContext):
+        self.stack.append(Value("1", VarType.BOOL, False))
+
+    def exitFalse(self, ctx: JFKParser.FalseContext):
+        self.stack.append(Value("0", VarType.BOOL, False))
+
+    # =============================================================================
 
     def error(self, line: int, msg: str):
         print("Error, line " + str(line) + ", " + msg, file=sys.stderr)

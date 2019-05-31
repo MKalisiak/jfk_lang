@@ -3,6 +3,7 @@ class LLVMGenerator:
     main_text = ""
     str_i = 1
     strings_declared = {}
+    cond_count = 1
 
     def output_string(self, text):
         str_len = len(text.encode('utf-8'))
@@ -37,6 +38,20 @@ class LLVMGenerator:
         self.main_text += "%" + self.reg + " = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @strs, i32 0, i32 0), i8* %" + str(self.str_i - 1) +")\n"
         self.str_i += 1
 
+    def output_id_bool(self, _id: str):
+        self.load_bool(_id)
+        self.main_text += f"%{self.reg} = icmp eq i1 %{self.prev_str()}, 1\n"
+        self.main_text += f"br i1 %{self.reg}, label %true{self.cond_count}, label %false{self.cond_count}\n"
+        self.str_i += 1
+        self.main_text += f"true{self.cond_count}:\n"
+        self.output_bool("1")
+        self.main_text += f"br label %end{self.cond_count}\n"
+        self.main_text += f"false{self.cond_count}:\n"
+        self.output_bool("0")
+        self.main_text += f"br label %end{self.cond_count}\n"
+        self.main_text += f"end{self.cond_count}:\n"
+        self.cond_count += 1
+
     def output_i32(self, value: str):
         self.main_text += "%" + self.reg + " = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @strpi, i32 0, i32 0), i32 " + value + ")\n"
         self.str_i += 1
@@ -45,11 +60,22 @@ class LLVMGenerator:
         self.main_text += "%" + self.reg + " = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([5 x i8], [5 x i8]* @strpd, i32 0, i32 0), double " + value + ")\n"
         self.str_i += 1
 
+    def output_bool(self, value: str):
+        if value == "1":
+            self.main_text += "%" + self.reg + " = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([6 x i8], [6 x i8]* @TrueLiteral, i32 0, i32 0))\n"
+            self.str_i += 1
+        else:
+            self.main_text += "%" + self.reg + " = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @FalseLiteral, i32 0, i32 0))\n"
+            self.str_i += 1
+
     def declare_i32(self, _id: str):
         self.main_text += "%"+_id+" = alloca i32\n"
 
     def declare_double(self, _id: str):
         self.main_text += "%" + _id + " = alloca double\n"
+
+    def declare_bool(self, _id: str):
+        self.main_text += f"%{_id} = alloca i1\n"
 
     def assign_i32(self, _id: str, value: str):
         self.main_text += "store i32 " + value + ", i32* %" + _id + "\n"
@@ -64,6 +90,13 @@ class LLVMGenerator:
     def assign_id_double(self, target, source):
         self.load_double(source)
         self.main_text += "store double %" + str(self.str_i - 1) + ", double* %" + target + "\n"
+
+    def assign_id_bool(self, target, source):
+        self.load_bool(source)
+        self.main_text += f"store i1 %{self.prev_str()}, i1* %{target}\n"
+
+    def assign_bool(self, _id, value):
+        self.main_text += f"store i1 {value}, i1* %{_id}\n"
 
     def assign_string(self, _id: str, value: str):
         str_len = len(value.encode('utf-8')) + 2
@@ -102,6 +135,10 @@ class LLVMGenerator:
 
     def load_double(self, _id):
         self.main_text += "%" + self.reg + " = load double, double* %" + _id + "\n"
+        self.str_i += 1
+
+    def load_bool(self, _id):
+        self.main_text += f"%{self.reg} = load i1, i1* %{_id}\n"
         self.str_i += 1
 
     def i32_to_double(self, value: str):
@@ -351,6 +388,8 @@ class LLVMGenerator:
         text += "@strpi = constant [4 x i8] c\"%d\\0A\\00\"\n"
         text += "@strpd = constant [5 x i8] c\"%lf\\0A\\00\"\n"
         text += "@strs = constant [4 x i8] c\"%s\\0A\\00\"\n"
+        text += "@TrueLiteral = constant [6 x i8] c\"True\\0A\\00\"\n"
+        text += "@FalseLiteral = constant [7 x i8] c\"False\\0A\\00\"\n"
         text += self.header_text
         text += "define i32 @main() nounwind{\n"
         text += self.main_text

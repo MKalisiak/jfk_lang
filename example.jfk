@@ -1,55 +1,12 @@
-output("Obsługa dwóch typów zmiennych: całkowite i rzeczywiste:")
-output(1)
-output(8.7)
+a = True
 
-output("a = 89.21, poniżej output(a)")
-a = 89.21
+b = 4 > 1
+
+c = a
+d = b
+
+output(True)
+output(False)
 output(a)
-
-output("")
-output("Obsługa podstawowych operacji arytmetycznych:")
-output("29 + 98.1 = ")
-output(29 + 98.1)
-
-output("")
-a = 29.0
-b = 8
-c = 2
-d = 4
-e = 7.2
-output("a = 29.0, b = 8, c = 2, d = 4, e = 7.2")
-output("a - b + c * d / e = ")
-output(a - b + c * d / e)
-
-output("")
-output("7.8 % 4 = ")
-output(7.8 % 4)
-
-output("")
-output("Obsługa typu ciąg znaków (string)")
-foo = "bar"
-output(foo)
-
-output("")
-output("Przypisanie do zmienne stringa z polskimi znakami:")
-output("nazwa_zmiennej = 'ĄĘŁÓŹĆŻ', poniżej output(nazwa_zmiennej)")
-nazwa_zmiennej = "ĄĘŁÓŹĆŻ"
-output(nazwa_zmiennej)
-
-output("Inkrementacja zmiennej")
-output("Poniżej output(b), następnie b = b + 1, a na koniec znów output(b)")
 output(b)
-b = b + 1
 output(b)
-
-output("")
-output("Podstawowa obsługa standardowego wejścia i wyjścia")
-output("Podaj swoj rok urodzenia:")
-
-age = 2019 - input(int)
-output("Twój wiek to:")
-output(age)
-
-
-output("Echo: ")
-output(input(string))

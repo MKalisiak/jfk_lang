@@ -17,6 +17,33 @@ class JFKListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by JFKParser#func.
+    def enterFunc(self, ctx:JFKParser.FuncContext):
+        pass
+
+    # Exit a parse tree produced by JFKParser#func.
+    def exitFunc(self, ctx:JFKParser.FuncContext):
+        pass
+
+
+    # Enter a parse tree produced by JFKParser#params.
+    def enterParams(self, ctx:JFKParser.ParamsContext):
+        pass
+
+    # Exit a parse tree produced by JFKParser#params.
+    def exitParams(self, ctx:JFKParser.ParamsContext):
+        pass
+
+
+    # Enter a parse tree produced by JFKParser#block.
+    def enterBlock(self, ctx:JFKParser.BlockContext):
+        pass
+
+    # Exit a parse tree produced by JFKParser#block.
+    def exitBlock(self, ctx:JFKParser.BlockContext):
+        pass
+
+
     # Enter a parse tree produced by JFKParser#line.
     def enterLine(self, ctx:JFKParser.LineContext):
         pass
@@ -41,6 +68,15 @@ class JFKListener(ParseTreeListener):
 
     # Exit a parse tree produced by JFKParser#assign.
     def exitAssign(self, ctx:JFKParser.AssignContext):
+        pass
+
+
+    # Enter a parse tree produced by JFKParser#ifStmt.
+    def enterIfStmt(self, ctx:JFKParser.IfStmtContext):
+        pass
+
+    # Exit a parse tree produced by JFKParser#ifStmt.
+    def exitIfStmt(self, ctx:JFKParser.IfStmtContext):
         pass
 
 
@@ -71,12 +107,39 @@ class JFKListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by JFKParser#equal.
+    def enterEqual(self, ctx:JFKParser.EqualContext):
+        pass
+
+    # Exit a parse tree produced by JFKParser#equal.
+    def exitEqual(self, ctx:JFKParser.EqualContext):
+        pass
+
+
     # Enter a parse tree produced by JFKParser#sub.
     def enterSub(self, ctx:JFKParser.SubContext):
         pass
 
     # Exit a parse tree produced by JFKParser#sub.
     def exitSub(self, ctx:JFKParser.SubContext):
+        pass
+
+
+    # Enter a parse tree produced by JFKParser#greaterThanEqual.
+    def enterGreaterThanEqual(self, ctx:JFKParser.GreaterThanEqualContext):
+        pass
+
+    # Exit a parse tree produced by JFKParser#greaterThanEqual.
+    def exitGreaterThanEqual(self, ctx:JFKParser.GreaterThanEqualContext):
+        pass
+
+
+    # Enter a parse tree produced by JFKParser#lessThanEqual.
+    def enterLessThanEqual(self, ctx:JFKParser.LessThanEqualContext):
+        pass
+
+    # Exit a parse tree produced by JFKParser#lessThanEqual.
+    def exitLessThanEqual(self, ctx:JFKParser.LessThanEqualContext):
         pass
 
 
@@ -95,6 +158,33 @@ class JFKListener(ParseTreeListener):
 
     # Exit a parse tree produced by JFKParser#mul.
     def exitMul(self, ctx:JFKParser.MulContext):
+        pass
+
+
+    # Enter a parse tree produced by JFKParser#lessThan.
+    def enterLessThan(self, ctx:JFKParser.LessThanContext):
+        pass
+
+    # Exit a parse tree produced by JFKParser#lessThan.
+    def exitLessThan(self, ctx:JFKParser.LessThanContext):
+        pass
+
+
+    # Enter a parse tree produced by JFKParser#notEqual.
+    def enterNotEqual(self, ctx:JFKParser.NotEqualContext):
+        pass
+
+    # Exit a parse tree produced by JFKParser#notEqual.
+    def exitNotEqual(self, ctx:JFKParser.NotEqualContext):
+        pass
+
+
+    # Enter a parse tree produced by JFKParser#greaterThan.
+    def enterGreaterThan(self, ctx:JFKParser.GreaterThanContext):
+        pass
+
+    # Exit a parse tree produced by JFKParser#greaterThan.
+    def exitGreaterThan(self, ctx:JFKParser.GreaterThanContext):
         pass
 
 
@@ -149,6 +239,24 @@ class JFKListener(ParseTreeListener):
 
     # Exit a parse tree produced by JFKParser#input.
     def exitInput(self, ctx:JFKParser.InputContext):
+        pass
+
+
+    # Enter a parse tree produced by JFKParser#true.
+    def enterTrue(self, ctx:JFKParser.TrueContext):
+        pass
+
+    # Exit a parse tree produced by JFKParser#true.
+    def exitTrue(self, ctx:JFKParser.TrueContext):
+        pass
+
+
+    # Enter a parse tree produced by JFKParser#false.
+    def enterFalse(self, ctx:JFKParser.FalseContext):
+        pass
+
+    # Exit a parse tree produced by JFKParser#false.
+    def exitFalse(self, ctx:JFKParser.FalseContext):
         pass
 
 
