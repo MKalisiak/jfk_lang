@@ -62,6 +62,15 @@ class JFKListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by JFKParser#loopblock.
+    def enterLoopblock(self, ctx:JFKParser.LoopblockContext):
+        pass
+
+    # Exit a parse tree produced by JFKParser#loopblock.
+    def exitLoopblock(self, ctx:JFKParser.LoopblockContext):
+        pass
+
+
     # Enter a parse tree produced by JFKParser#line.
     def enterLine(self, ctx:JFKParser.LineContext):
         pass
@@ -95,6 +104,15 @@ class JFKListener(ParseTreeListener):
 
     # Exit a parse tree produced by JFKParser#ifStmt.
     def exitIfStmt(self, ctx:JFKParser.IfStmtContext):
+        pass
+
+
+    # Enter a parse tree produced by JFKParser#while.
+    def enterWhile(self, ctx:JFKParser.WhileContext):
+        pass
+
+    # Exit a parse tree produced by JFKParser#while.
+    def exitWhile(self, ctx:JFKParser.WhileContext):
         pass
 
 

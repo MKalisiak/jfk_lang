@@ -482,6 +482,29 @@ class LLVMGenerator:
         self.main_text += f"br label %end{self.ifstack[-1]}\n"
         self.main_text += f"false{self.ifstack[-1]}:\n"
 
+    def start_while(self):
+        self.cond_count += 1
+        self.main_text += f"br label %while{self.cond_count}\n"
+        self.main_text += f"while{self.cond_count}:\n"
+        self.ifstack.append(self.cond_count)
+
+    def start_while_block(self, condition: str, is_id: bool):
+        if is_id:
+            self.load_bool(condition)
+            tmp = "%" + self.prev_str()
+        else:
+            tmp = condition
+
+        # self.cond_count += 1
+        self.main_text += f"br i1 {tmp}, label %whileBlock{self.ifstack[-1]}, label %endWhile{self.ifstack[-1]}\n"
+        self.main_text += f"whileBlock{self.ifstack[-1]}:\n"
+
+    def back_to_while(self):
+        self.main_text += f"br label %while{self.ifstack[-1]}\n"
+
+    def end_while(self):
+        self.main_text += f"endWhile{self.ifstack.pop()}:\n"
+
     ####################################################################################################
 
     def generate(self):

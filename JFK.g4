@@ -18,12 +18,17 @@ ifblock: block
 
 elseblock: block
     ;
+
+loopblock: block
+    ;
+
 line:   statement? comment? NEWLINE 
     ;
 
 statement:	  OUTPUT '(' expression ')'                 #output
 	        | ID '=' expression		                    #assign
 	        | IF expression ifblock (ELSE elseblock)?   #ifStmt
+	        | WHILE expression loopblock                #while
    ;
 
 expression:   value			             #single
@@ -51,6 +56,9 @@ value:   ID                         #id
        | TRUE                       #true
        | FALSE                      #false
    ;
+
+WHILE: 'while'
+    ;
 
 ELSE: 'else'
     ;

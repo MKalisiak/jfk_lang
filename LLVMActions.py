@@ -212,6 +212,19 @@ class LLVMActions(JFKListener):
     def exitElseblock(self, ctx: JFKParser.ElseblockContext):
         self.generator.end_if()
 
+    def enterWhile(self, ctx: JFKParser.WhileContext):
+        self.generator.start_while()
+
+    def enterLoopblock(self, ctx: JFKParser.LoopblockContext):
+        condition = self.stack.pop()
+        self.generator.start_while_block(condition.name, condition.is_id)
+
+    def exitLoopblock(self, ctx: JFKParser.LoopblockContext):
+        self.generator.back_to_while()
+
+    def exitWhile(self, ctx: JFKParser.WhileContext):
+        self.generator.end_while()
+
     # =============================================================================
 
     def error(self, line: int, msg: str):
