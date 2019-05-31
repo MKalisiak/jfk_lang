@@ -1,9 +1,13 @@
+from collections import deque
+import sys
+
 class LLVMGenerator:
     header_text = ""
     main_text = ""
     str_i = 1
     strings_declared = {}
     cond_count = 1
+    ifstack = deque()
 
     def output_string(self, text):
         str_len = len(text.encode('utf-8'))
@@ -39,6 +43,7 @@ class LLVMGenerator:
         self.str_i += 1
 
     def output_id_bool(self, _id: str):
+        self.cond_count += 1
         self.load_bool(_id)
         self.main_text += f"%{self.reg} = icmp eq i1 %{self.prev_str()}, 1\n"
         self.main_text += f"br i1 %{self.reg}, label %true{self.cond_count}, label %false{self.cond_count}\n"
@@ -50,7 +55,6 @@ class LLVMGenerator:
         self.output_bool("0")
         self.main_text += f"br label %end{self.cond_count}\n"
         self.main_text += f"end{self.cond_count}:\n"
-        self.cond_count += 1
 
     def output_i32(self, value: str):
         self.main_text += "%" + self.reg + " = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @strpi, i32 0, i32 0), i32 " + value + ")\n"
@@ -62,6 +66,7 @@ class LLVMGenerator:
 
     def output_bool(self, value: str):
         if value.startswith("%"):
+            self.cond_count += 1
             self.main_text += f"%{self.reg} = icmp eq i1 {value}, 1\n"
             self.main_text += f"br i1 %{self.reg}, label %true{self.cond_count}, label %false{self.cond_count}\n"
             self.str_i += 1
@@ -72,7 +77,6 @@ class LLVMGenerator:
             self.output_bool("0")
             self.main_text += f"br label %end{self.cond_count}\n"
             self.main_text += f"end{self.cond_count}:\n"
-            self.cond_count += 1
         else:
             if value == "1":
                 self.main_text += "%" + self.reg + " = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([6 x i8], [6 x i8]* @TrueLiteral, i32 0, i32 0))\n"
@@ -197,7 +201,7 @@ class LLVMGenerator:
         self.load_double(_id)
         self.main_text += "%" + self.reg + " = fmul double " + value + ", %" + self.prev_str() + "\n"
         self.str_i += 1
-        
+
     def mul_hybrid_double_id_value(self, _id, value):
         self.load_double(_id)
         self.main_text += "%" + self.reg + " = fmul double %" + self.prev_str() + ", " + value + "\n"
@@ -454,6 +458,31 @@ class LLVMGenerator:
         self.str_i += 1
         self.main_text += f"%{self.reg} = call i32 (i8*, ...) @__isoc99_scanf(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @strs, i32 0, i32 0), i8* %{self.prev_str()})\n"
         self.str_i += 1
+
+    ####################################################################################################
+
+    def start_if(self, condition: str, is_id: bool, will_have_else: bool):
+        if is_id:
+            self.load_bool(condition)
+            tmp = "%" + self.prev_str()
+        else:
+            tmp = condition
+
+        self.cond_count += 1
+        self.ifstack.append(self.cond_count)
+        self.main_text += f"br i1 {tmp}, label %true{self.cond_count}, label %{'false' if will_have_else else 'end'}{self.cond_count}\n"
+        self.main_text += f"true{self.cond_count}:\n"
+
+    def end_if(self):
+        tmp_cond_count = self.ifstack.pop()
+        self.main_text += f"br label %end{tmp_cond_count}\n"
+        self.main_text += f"end{tmp_cond_count}:\n"
+
+    def start_else(self):
+        self.main_text += f"br label %end{self.ifstack[-1]}\n"
+        self.main_text += f"false{self.ifstack[-1]}:\n"
+
+    ####################################################################################################
 
     def generate(self):
         text = "declare i32 @printf(i8*, ...)\n"

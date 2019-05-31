@@ -1,11 +1,25 @@
-output(1 == 1)
-output(1 == 1.0)
-output(1.0 == 1.0)
-output(True == True)
-output(False == False)
-output(1 != 2)
-output(4.0 > 3.0)
-output(-5.2 < 6.2)
-output(-10 <= -10.0)
-output(-10 >= -10.0)
+a = 5
+b = 6
 
+if a > b {
+   output("Super!")
+   if True == False {
+        output(a == b)
+   } else {
+        output("DUPA")
+   }
+} else {
+    if True {
+        output("DASDSADSADSA")
+    }
+}
+
+c = False
+if c {
+    output("BBB")
+} else {
+    output(1 + 1)
+}
+
+
+output(True == False)

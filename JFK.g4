@@ -13,12 +13,17 @@ params: ID (',' ID)*
 block: '{' line* '}'
     ;
 
+ifblock: block
+    ;
+
+elseblock: block
+    ;
 line:   statement? comment? NEWLINE 
     ;
 
-statement:	  OUTPUT '(' expression ')'             #output
-	        | ID '=' expression		                #assign
-	        | 'if' expression block ('else' block)? #ifStmt
+statement:	  OUTPUT '(' expression ')'                 #output
+	        | ID '=' expression		                    #assign
+	        | IF expression ifblock (ELSE elseblock)?   #ifStmt
    ;
 
 expression:   value			             #single
@@ -46,6 +51,12 @@ value:   ID                         #id
        | TRUE                       #true
        | FALSE                      #false
    ;
+
+ELSE: 'else'
+    ;
+
+IF: 'if'
+    ;
 
 EQ: '=='
     ;

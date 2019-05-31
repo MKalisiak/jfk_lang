@@ -14,6 +14,7 @@ class LLVMActions(JFKListener):
         self.generator = LLVMGenerator()
         self.stack = deque()
         self.variables = dict()
+        self.will_have_else = deque()
 
     def exitOutput(self, ctx: JFKParser.OutputContext):
         value = self.stack.pop()  # type: Value
@@ -120,7 +121,6 @@ class LLVMActions(JFKListener):
         ...
 
     def exitAssign(self, ctx: JFKParser.AssignContext):
-        print(self.stack, file=sys.stderr)
         ID = ctx.ID().getText()  # type: str
         value = self.stack.pop()  # type: Value
         if value.is_id:
@@ -194,6 +194,23 @@ class LLVMActions(JFKListener):
 
     def exitLessThanEqual(self, ctx: JFKParser.LessThanEqualContext):
         self.exitComp('le', ctx, "Comparision not permitted for type STRING")
+
+    def enterIfStmt(self, ctx: JFKParser.IfStmtContext):
+        self.will_have_else.append(ctx.ELSE() is not None)
+
+    def enterIfblock(self, ctx: JFKParser.IfblockContext):
+        condition = self.stack.pop()
+        self.generator.start_if(condition.name, condition.is_id, self.will_have_else[-1])
+
+    def exitIfblock(self, ctx: JFKParser.IfblockContext):
+        if not self.will_have_else.pop():
+            self.generator.end_if()
+
+    def enterElseblock(self, ctx: JFKParser.ElseblockContext):
+        self.generator.start_else()
+
+    def exitElseblock(self, ctx: JFKParser.ElseblockContext):
+        self.generator.end_if()
 
     # =============================================================================
 
