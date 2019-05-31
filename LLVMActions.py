@@ -177,6 +177,24 @@ class LLVMActions(JFKListener):
     def exitFalse(self, ctx: JFKParser.FalseContext):
         self.stack.append(Value("0", VarType.BOOL, False))
 
+    def exitEqual(self, ctx: JFKParser.EqualContext):
+        self.exitComp('eq', ctx, "Equality comparision not permitted for type STRING")
+
+    def exitNotEqual(self, ctx: JFKParser.NotEqualContext):
+        self.exitComp('ne', ctx, "Inequality comparision not permitted for type STRING")
+
+    def exitGreaterThan(self, ctx: JFKParser.GreaterThanContext):
+        self.exitComp('gt', ctx, "Comparision not permitted for type STRING")
+
+    def exitGreaterThanEqual(self, ctx: JFKParser.GreaterThanEqualContext):
+        self.exitComp('ge', ctx, "Comparision not permitted for type STRING")
+
+    def exitLessThan(self, ctx: JFKParser.LessThanContext):
+        self.exitComp('lt', ctx, "Comparision not permitted for type STRING")
+
+    def exitLessThanEqual(self, ctx: JFKParser.LessThanEqualContext):
+        self.exitComp('le', ctx, "Comparision not permitted for type STRING")
+
     # =============================================================================
 
     def error(self, line: int, msg: str):
@@ -191,7 +209,7 @@ class LLVMActions(JFKListener):
             else:
                 self.generator.i32_to_double(v1.name)
                 v1 = Value("%" + str(self.generator.str_i - 1), VarType.FLOAT, False)
-        else:
+        elif v1.type == VarType.FLOAT:
             if v2.is_id:
                 self.generator.i32_to_double_id(v2.name)
                 v2 = Value("%" + str(self.generator.str_i - 1), VarType.FLOAT, False)
@@ -226,5 +244,60 @@ class LLVMActions(JFKListener):
                 getattr(self.generator, op_name + "_hybrid_double_id_value")(_id=v1.name, value=v2.name)
             else:
                 getattr(self.generator, op_name + "_hybrid_double_value_id")(_id=v2.name, value=v1.name)
+
+        return v1, v2
+
+    def exitComp(self, op_name, ctx, string_error):
+        v1 = self.stack.pop()  # type: Value
+        v2 = self.stack.pop()  # type: Value
+
+        if v1.type == VarType.STRING or v2.type == VarType.STRING:
+            self.error(ctx.start.line, string_error)
+        else:
+            if v1.type != v2.type and (v1.type == VarType.BOOL or v2.type == VarType.BOOL):
+                self.error(ctx.start.line, f"Cannot compare {v1.type} with {v2.type}")
+            v1, v2 = self.comp(op_name, v1, v2)
+            self.stack.append(Value("%" + str(self.generator.str_i - 1), VarType.BOOL, False))
+
+    def comp(self, op_name, v1, v2):
+        v1, v2 = v2, v1
+
+        if v1.type != v2.type:
+            v1, v2 = self.unify_types(v1, v2)
+
+        if v1.type == VarType.INT:
+            if op_name != "eq" and op_name != "ne":
+                op_name = "s" + op_name
+            if not v1.is_id and not v2.is_id:
+                self.generator.comp_i32(op_name, v1.name, v2.name)
+            elif v1.is_id and v2.is_id:
+                self.generator.comp_id_i32(op_name, v1.name, v2.name)
+            elif v1.is_id:
+                self.generator.comp_hybrid_i32_id_value(op_name, _id=v1.name, value=v2.name)
+            else:
+                self.generator.comp_hybrid_i32_value_id(op_name, _id=v2.name, value=v1.name)
+
+        elif v1.type == VarType.FLOAT:
+            op_name = "o" + op_name
+            if not v1.is_id and not v2.is_id:
+                self.generator.comp_double(op_name, v1.name, v2.name)
+            elif v1.is_id and v2.is_id:
+                self.generator.comp_id_double(op_name, v1.name, v2.name)
+            elif v1.is_id:
+                self.generator.comp_hybrid_double_id_value(op_name, _id=v1.name, value=v2.name)
+            else:
+                self.generator.comp_hybrid_double_value_id(op_name, _id=v2.name, value=v1.name)
+        
+        elif v1.type == VarType.BOOL:
+            if op_name != "eq" and op_name != "ne":
+                op_name = "u" + op_name
+            if not v1.is_id and not v2.is_id:
+                self.generator.comp_i1(op_name, v1.name, v2.name)
+            elif v1.is_id and v2.is_id:
+                self.generator.comp_id_i1(op_name, v1.name, v2.name)
+            elif v1.is_id:
+                self.generator.comp_hybrid_i1_id_value(op_name, _id=v1.name, value=v2.name)
+            else:
+                self.generator.comp_hybrid_i1_value_id(op_name, _id=v2.name, value=v1.name)
 
         return v1, v2

@@ -61,12 +61,25 @@ class LLVMGenerator:
         self.str_i += 1
 
     def output_bool(self, value: str):
-        if value == "1":
-            self.main_text += "%" + self.reg + " = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([6 x i8], [6 x i8]* @TrueLiteral, i32 0, i32 0))\n"
+        if value.startswith("%"):
+            self.main_text += f"%{self.reg} = icmp eq i1 {value}, 1\n"
+            self.main_text += f"br i1 %{self.reg}, label %true{self.cond_count}, label %false{self.cond_count}\n"
             self.str_i += 1
+            self.main_text += f"true{self.cond_count}:\n"
+            self.output_bool("1")
+            self.main_text += f"br label %end{self.cond_count}\n"
+            self.main_text += f"false{self.cond_count}:\n"
+            self.output_bool("0")
+            self.main_text += f"br label %end{self.cond_count}\n"
+            self.main_text += f"end{self.cond_count}:\n"
+            self.cond_count += 1
         else:
-            self.main_text += "%" + self.reg + " = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @FalseLiteral, i32 0, i32 0))\n"
-            self.str_i += 1
+            if value == "1":
+                self.main_text += "%" + self.reg + " = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([6 x i8], [6 x i8]* @TrueLiteral, i32 0, i32 0))\n"
+                self.str_i += 1
+            else:
+                self.main_text += "%" + self.reg + " = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @FalseLiteral, i32 0, i32 0))\n"
+                self.str_i += 1
 
     def declare_i32(self, _id: str):
         self.main_text += "%"+_id+" = alloca i32\n"
@@ -353,6 +366,69 @@ class LLVMGenerator:
         self.load_double(_id)
         self.main_text += "%" + self.reg + " = frem double %" + self.prev_str() + ", " + value + "\n"
         self.str_i += 1
+
+    # ####################################################################################################
+    def comp_i1(self, op_name, value1, value2):
+        self.main_text += "%" + self.reg + f" = icmp {op_name} i1 " + value1 + ", " + value2 + "\n"
+        self.str_i += 1
+
+    def comp_id_i1(self, op_name, _id1, _id2):
+        self.load_bool(_id1)
+        self.load_bool(_id2)
+        self.main_text += "%" + self.reg + f" = icmp {op_name} i1 %" + self.prev_str(2) + ", %" + self.prev_str() + "\n"
+        self.str_i += 1
+
+    def comp_hybrid_i1_value_id(self, op_name, value, _id):
+        self.load_bool(_id)
+        self.main_text += "%" + self.reg + f" = icmp {op_name} i1 " + value + ", %" + self.prev_str() + "\n"
+        self.str_i += 1
+
+    def comp_hybrid_i1_id_value(self, op_name, _id, value):
+        self.load_bool(_id)
+        self.main_text += "%" + self.reg + f" = icmp {op_name} i1 %" + self.prev_str() + ", " + value + "\n"
+        self.str_i += 1
+
+    def comp_i32(self, op_name, value1, value2):
+        self.main_text += "%" + self.reg + f" = icmp {op_name} i32 " + value1 + ", " + value2 + "\n"
+        self.str_i += 1
+
+    def comp_id_i32(self, op_name, _id1, _id2):
+        self.load_i32(_id1)
+        self.load_i32(_id2)
+        self.main_text += "%" + self.reg + f" = icmp {op_name} i32 %" + self.prev_str(2) + ", %" + self.prev_str() + "\n"
+        self.str_i += 1
+
+    def comp_hybrid_i32_value_id(self, op_name, value, _id):
+        self.load_i32(_id)
+        self.main_text += "%" + self.reg + f" = icmp {op_name} i32 " + value + ", %" + self.prev_str() + "\n"
+        self.str_i += 1
+
+    def comp_hybrid_i32_id_value(self, op_name, _id, value):
+        self.load_i32(_id)
+        self.main_text += "%" + self.reg + f" = icmp {op_name} i32 %" + self.prev_str() + ", " + value + "\n"
+        self.str_i += 1
+
+    def comp_double(self, op_name, value1, value2):
+        self.main_text += "%" + self.reg + f" = fcmp {op_name} double " + value1 + ", " + value2 + "\n"
+        self.str_i += 1
+
+    def comp_id_double(self, op_name, _id1, _id2):
+        self.load_double(_id1)
+        self.load_double(_id2)
+        self.main_text += "%" + self.reg + f" = fcmp {op_name} double %" + self.prev_str(2) + ", %" + self.prev_str() + "\n"
+        self.str_i += 1
+
+    def comp_hybrid_double_value_id(self, op_name, value, _id):
+        self.load_double(_id)
+        self.main_text += "%" + self.reg + f" = fcmp {op_name} double " + value + ", %" + self.prev_str() + "\n"
+        self.str_i += 1
+
+    def comp_hybrid_double_id_value(self, op_name, _id, value):
+        self.load_double(_id)
+        self.main_text += "%" + self.reg + f" = fcmp {op_name} double %" + self.prev_str() + ", " + value + "\n"
+        self.str_i += 1
+
+    # ####################################################################################################
 
     def input_i32(self):
         self.declare_i32(self.reg)
