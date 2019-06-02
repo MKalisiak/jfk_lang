@@ -3,11 +3,14 @@ grammar JFK;
 program: (line | func)*
     ;
 
-func: params '->' ID '->' block
+func: params '->' ID ':' TYPE_KEYWORD '->' block
     ;
 
-params: ID (',' ID)*
+params: param (',' param)*
         |
+    ;
+
+param: ID ':' TYPE_KEYWORD
     ;
 
 block: '{' line* '}'
@@ -29,6 +32,7 @@ statement:	  OUTPUT '(' expression ')'                 #output
 	        | ID '=' expression		                    #assign
 	        | IF expression ifblock (ELSE elseblock)?   #ifStmt
 	        | WHILE expression loopblock                #while
+	        | RETURN expression                         #return
    ;
 
 expression:   value			             #single
@@ -56,6 +60,9 @@ value:   ID                         #id
        | TRUE                       #true
        | FALSE                      #false
    ;
+
+RETURN: 'return'
+    ;
 
 WHILE: 'while'
     ;
@@ -90,7 +97,7 @@ TRUE: 'True'
 FALSE: 'False'
     ;
 
-TYPE_KEYWORD: 'int' | 'float' | 'string'
+TYPE_KEYWORD: 'int' | 'float' | 'string' | 'bool'
     ;
 
 INPUT:  'input'

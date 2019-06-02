@@ -4,7 +4,7 @@ from collections import deque
 from JFKListener import JFKListener
 from JFKParser import JFKParser
 from LLVMGenerator import LLVMGenerator
-from utils import Value, VarType
+from utils import Value, VarType, Param
 
 
 class LLVMActions(JFKListener):
@@ -15,6 +15,9 @@ class LLVMActions(JFKListener):
         self.stack = deque()
         self.variables = dict()
         self.will_have_else = deque()
+        self.has_return = (False, None)
+        self.function_variables = {}
+        self.in_function = False
 
     def exitOutput(self, ctx: JFKParser.OutputContext):
         value = self.stack.pop()  # type: Value
@@ -39,6 +42,7 @@ class LLVMActions(JFKListener):
                 self.generator.output_bool(value.name)
 
     def exitProgram(self, ctx: JFKParser.ProgramContext):
+        self.generator.close_main()
         print(self.generator.generate())
 
     def exitInt(self, ctx: JFKParser.IntContext):
@@ -50,7 +54,10 @@ class LLVMActions(JFKListener):
     def exitId(self, ctx: JFKParser.IdContext):
         _id = ctx.ID().getText()
         try:
-            var_type = self.variables[_id]
+            if self.in_function:
+                var_type = self.function_variables[_id]
+            else:
+                var_type = self.variables[_id]
             if var_type == VarType.INT:
                 self.stack.append(Value(_id, VarType.INT, True))
             elif var_type == VarType.FLOAT:
@@ -224,6 +231,30 @@ class LLVMActions(JFKListener):
 
     def exitWhile(self, ctx: JFKParser.WhileContext):
         self.generator.end_while()
+
+    def enterFunc(self, ctx: JFKParser.FuncContext):
+        params = [Param(p.ID().getText(), p.TYPE_KEYWORD().getText()) for p in ctx.params().param()]
+
+        self.function_variables = {p.name: VarType(p.type) for p in params}
+
+        name = ctx.ID().getText()
+        return_type = ctx.TYPE_KEYWORD().getText()
+        self.has_return = (False, return_type)
+        self.in_function = True
+        self.generator.start_func(name, params, return_type)
+
+    def exitReturn(self, ctx: JFKParser.ReturnContext):
+        return_value = self.stack.pop()
+        if return_value.type.value != self.has_return[1]:
+            self.error(ctx.start.line, f"Expected return type {self.has_return[1]} but got {return_value.type.value}")
+        else:
+            self.generator.return_func(*return_value)
+
+        self.has_return = (True, self.has_return[1])
+
+    def exitFunc(self, ctx: JFKParser.FuncContext):
+        self.generator.exit_func(ctx.TYPE_KEYWORD().getText(), self.has_return[0])
+        self.in_function = False
 
     # =============================================================================
 

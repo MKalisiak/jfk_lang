@@ -35,6 +35,15 @@ class JFKListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by JFKParser#param.
+    def enterParam(self, ctx:JFKParser.ParamContext):
+        pass
+
+    # Exit a parse tree produced by JFKParser#param.
+    def exitParam(self, ctx:JFKParser.ParamContext):
+        pass
+
+
     # Enter a parse tree produced by JFKParser#block.
     def enterBlock(self, ctx:JFKParser.BlockContext):
         pass
@@ -113,6 +122,15 @@ class JFKListener(ParseTreeListener):
 
     # Exit a parse tree produced by JFKParser#while.
     def exitWhile(self, ctx:JFKParser.WhileContext):
+        pass
+
+
+    # Enter a parse tree produced by JFKParser#return.
+    def enterReturn(self, ctx:JFKParser.ReturnContext):
+        pass
+
+    # Exit a parse tree produced by JFKParser#return.
+    def exitReturn(self, ctx:JFKParser.ReturnContext):
         pass
 
 
