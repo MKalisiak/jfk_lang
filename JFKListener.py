@@ -314,3 +314,21 @@ class JFKListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by JFKParser#funcCall.
+    def enterFuncCall(self, ctx:JFKParser.FuncCallContext):
+        pass
+
+    # Exit a parse tree produced by JFKParser#funcCall.
+    def exitFuncCall(self, ctx:JFKParser.FuncCallContext):
+        pass
+
+
+    # Enter a parse tree produced by JFKParser#args.
+    def enterArgs(self, ctx:JFKParser.ArgsContext):
+        pass
+
+    # Exit a parse tree produced by JFKParser#args.
+    def exitArgs(self, ctx:JFKParser.ArgsContext):
+        pass
+
+

@@ -2,7 +2,7 @@ from collections import deque
 import sys
 from typing import List
 
-from utils import Param, VarType
+from utils import Param, VarType, Value
 
 types = {
     'int': 'i32',
@@ -547,6 +547,31 @@ class LLVMGenerator:
         self.header_text += self.buffer
         self.buffer = ""
         self.header_text += "}\n"
+
+    def func_call(self, name: str, args: List[Value], return_type: str):
+        """
+          %2 = load i32, i32* %1, align 4
+          %3 = call i32 @sum(i32 %2, i32 2)
+        """
+        nb_id_args = 0
+        for arg in args:
+            if arg.is_id:
+                self.buffer += f"%{self.reg} = load {types[arg.type.value]}, {types[arg.type.value]}* %{arg.name}\n"
+                self.str_i += 1
+                nb_id_args += 1
+
+        args_str = []
+        id_arg_counter = 0
+        for arg in args:
+            if arg.is_id:
+                args_str.append(f"{types[arg.type.value]} %{self.prev_str(nb_id_args - id_arg_counter)}")
+                id_arg_counter += 1
+            else:
+                args_str.append(f"{types[arg.type.value]} {arg.name}")
+        args_str = ', '.join(args_str)
+
+        self.buffer += f"%{self.reg} = call {types[return_type]} @{name}({args_str})\n"
+        self.str_i += 1
 
     ####################################################################################################
     def close_main(self):

@@ -1,5 +1,6 @@
 import sys
 from collections import deque
+from copy import copy
 
 from JFKListener import JFKListener
 from JFKParser import JFKParser
@@ -18,6 +19,7 @@ class LLVMActions(JFKListener):
         self.has_return = (False, None)
         self.function_variables = {}
         self.in_function = False
+        self.functions = {}
 
     def exitOutput(self, ctx: JFKParser.OutputContext):
         value = self.stack.pop()  # type: Value
@@ -130,38 +132,44 @@ class LLVMActions(JFKListener):
     def exitAssign(self, ctx: JFKParser.AssignContext):
         ID = ctx.ID().getText()  # type: str
         value = self.stack.pop()  # type: Value
+        
+        current_variables = copy(self.variables) if not self.in_function else copy(self.function_variables)
+        
         if value.is_id:
             if value.type == VarType.INT:
-                if ID not in self.variables:
+                if ID not in current_variables:
                     self.generator.declare_i32(ID)
                 self.generator.assign_id_i32(ID, value.name)
             elif value.type == VarType.FLOAT:
-                if ID not in self.variables:
+                if ID not in current_variables:
                     self.generator.declare_double(ID)
                 self.generator.assign_id_double(ID, value.name)
             elif value.type == VarType.STRING:
                 self.generator.assign_id_string(ID, value.name)
             elif value.type == VarType.BOOL:
-                if ID not in self.variables:
+                if ID not in current_variables:
                     self.generator.declare_bool(ID)
                 self.generator.assign_id_bool(ID, value.name)
         else:
             if value.type == VarType.INT:
-                if ID not in self.variables:
+                if ID not in current_variables:
                     self.generator.declare_i32(ID)
                 self.generator.assign_i32(ID, value.name)
             elif value.type == VarType.FLOAT:
-                if ID not in self.variables:
+                if ID not in current_variables:
                     self.generator.declare_double(ID)
                 self.generator.assign_double(ID, value.name)
             elif value.type == VarType.STRING:
                 self.generator.assign_string(ID, value.name[1:-1])
             elif value.type == VarType.BOOL:
-                if ID not in self.variables:
+                if ID not in current_variables:
                     self.generator.declare_bool(ID)
                 self.generator.assign_bool(ID, value.name)
 
-        self.variables[ID] = value.type
+        if self.in_function:
+            self.function_variables[ID] = value.type
+        else:
+            self.variables[ID] = value.type
 
     def exitInput(self, ctx: JFKParser.InputContext):
         TYPE = ctx.TYPE_KEYWORD().getText()
@@ -233,12 +241,16 @@ class LLVMActions(JFKListener):
         self.generator.end_while()
 
     def enterFunc(self, ctx: JFKParser.FuncContext):
+        name = ctx.ID().getText()
         params = [Param(p.ID().getText(), p.TYPE_KEYWORD().getText()) for p in ctx.params().param()]
+        return_type = ctx.TYPE_KEYWORD().getText()
+        if name in self.functions:
+            self.error(ctx.start.line, f"Function '{name}' already defined")
+        else:
+            self.functions[name] = [VarType(p.type) for p in params], return_type
 
         self.function_variables = {p.name: VarType(p.type) for p in params}
 
-        name = ctx.ID().getText()
-        return_type = ctx.TYPE_KEYWORD().getText()
         self.has_return = (False, return_type)
         self.in_function = True
         self.generator.start_func(name, params, return_type)
@@ -255,6 +267,22 @@ class LLVMActions(JFKListener):
     def exitFunc(self, ctx: JFKParser.FuncContext):
         self.generator.exit_func(ctx.TYPE_KEYWORD().getText(), self.has_return[0])
         self.in_function = False
+
+    def exitFuncCall(self, ctx: JFKParser.FuncCallContext):
+        fname = ctx.ID().getText()
+        try:
+            fparams, return_type = self.functions[fname]
+            given_args = list(reversed([self.stack.pop() for i in range(len(ctx.args().expression()))]))
+            given_args_types = [arg.type for arg in given_args]
+
+            if not (len(fparams) == len(given_args) and fparams == given_args_types):
+                self.error(ctx.start.line, f"Arguments do not match function definition. \n"
+                                           f"Expected: {[p.value for p in fparams]}, "
+                                           f"given: {[a.value for a in given_args_types]}")
+            self.generator.func_call(fname, given_args, return_type)
+            self.stack.append(Value("%" + str(self.generator.str_i - 1), VarType(return_type), False))
+        except KeyError:
+            self.error(ctx.start.line, f"Unresolved function name '{fname}'")
 
     # =============================================================================
 

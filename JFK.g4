@@ -59,7 +59,11 @@ value:   ID                         #id
        | INPUT '(' TYPE_KEYWORD ')' #input
        | TRUE                       #true
        | FALSE                      #false
+       | ID '(' args ')'            #funcCall
    ;
+
+args: expression (',' expression)*
+    ;
 
 RETURN: 'return'
     ;
