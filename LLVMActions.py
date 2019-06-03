@@ -299,6 +299,11 @@ class LLVMActions(JFKListener):
         else:
             self.error(ctx.start.line, f"Cannot use {ctx.CONTINUE().getText()} keyword outside of loop")
 
+    def exitExit(self, ctx: JFKParser.ExitContext):
+        if not self.in_function:
+            self.generator.exit()
+        else:
+            self.error(ctx.start.line, "Cannot exit program while in function")
     # =============================================================================
 
     def error(self, line: int, msg: str):

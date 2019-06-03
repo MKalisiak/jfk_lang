@@ -10,7 +10,6 @@ n:int -> fib:int -> {
     if n == 1 {
         return 1
     }
-
     return fib(n - 1) + fib(n - 2)
 }
 
@@ -41,11 +40,11 @@ output(fib(5))
 output(fib(6))
 
 output("")
-output("StopRightNow statement:")
+output("Stop right now statement:")
 while a > 0 {
     output(a)
     if a < 15 {
-        StopRightNow
+        Stop right now!
     }
     a = a - 1
 }
@@ -53,12 +52,14 @@ while a > 0 {
 output(a)
 
 output("")
-output("Continue statement")
+output("Skip iteration statement")
 while a > 0 {
     a = a - 1
     if a % 2 == 0 {
-        continue
+        Skip iteration
     } else {
         output(a)
     }
 }
+
+I will be back

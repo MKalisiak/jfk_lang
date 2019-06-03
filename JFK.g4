@@ -35,6 +35,7 @@ statement:	  OUTPUT '(' expression ')'                 #output
 	        | RETURN expression                         #return
 	        | BREAK                                     #break
 	        | CONTINUE                                  #continue
+	        | EXIT                                      #exit
    ;
 
 expression:   value			             #single
@@ -67,10 +68,13 @@ value:   ID                         #id
 args: expression (',' expression)*
     ;
 
-BREAK: 'StopRightNow'
+EXIT: 'I will be back'
     ;
 
-CONTINUE: 'continue'
+BREAK: 'Stop right now!'
+    ;
+
+CONTINUE: 'Skip iteration'
     ;
 
 RETURN: 'return'

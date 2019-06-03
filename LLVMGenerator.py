@@ -521,17 +521,17 @@ class LLVMGenerator:
     ###################################################################################################
 
     def start_func(self, name, params: List[Param], return_type):
-        self.header_text += f"define dso_local {types[return_type]} @{name}({', '.join([types[p.type] for p in params])}) {{\n"
+        self.main_text += self.buffer
+        self.buffer = ""
+
+        self.buffer += f"define dso_local {types[return_type]} @{name}({', '.join([types[p.type] for p in params])}) {{\n"
         self.main_str_i = self.str_i
         self.str_i = 0
         for param in params:
-            self.header_text += f"%{param.name} = alloca {types[param.type]}\n"
-            self.header_text += f"store {types[param.type]} %{self.reg}, {types[param.type]}* %{param.name}\n"
+            self.buffer += f"%{param.name} = alloca {types[param.type]}\n"
+            self.buffer += f"store {types[param.type]} %{self.reg}, {types[param.type]}* %{param.name}\n"
             self.str_i += 1
         self.str_i += 1
-
-        self.main_text += self.buffer
-        self.buffer = ""
 
     def return_func(self, name: str, _type: VarType, is_id: bool):
         return_type = types[_type.value]
@@ -594,6 +594,10 @@ class LLVMGenerator:
         self.buffer += f"br label %while{self.whilestack[-1]}\n"
         self.str_i += 1
 
+    def exit(self):
+        self.buffer += "br label %exit\n"
+        self.str_i += 1
+
     ####################################################################################################
     def close_main(self):
         self.main_text += self.buffer
@@ -612,5 +616,7 @@ class LLVMGenerator:
         text += self.header_text
         text += "define i32 @main() nounwind{\n"
         text += self.main_text
+        text += "br label %exit\n"
+        text += "exit:\n"
         text += "ret i32 0 }\n"
         return text

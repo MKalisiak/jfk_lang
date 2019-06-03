@@ -152,6 +152,15 @@ class JFKListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by JFKParser#exit.
+    def enterExit(self, ctx:JFKParser.ExitContext):
+        pass
+
+    # Exit a parse tree produced by JFKParser#exit.
+    def exitExit(self, ctx:JFKParser.ExitContext):
+        pass
+
+
     # Enter a parse tree produced by JFKParser#single.
     def enterSingle(self, ctx:JFKParser.SingleContext):
         pass
