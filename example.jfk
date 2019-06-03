@@ -26,8 +26,12 @@ a:float, b:int -> power:float -> {
 
 a = sum(6, 4) + power(2.0, 3)
 
+output("Calling functions: sum(6, 4) + power(2.0, 3)")
 output(a)
 
+
+output("")
+output("Recursion - fibonacci:")
 output(fib(0))
 output(fib(1))
 output(fib(2))
@@ -35,3 +39,26 @@ output(fib(3))
 output(fib(4))
 output(fib(5))
 output(fib(6))
+
+output("")
+output("StopRightNow statement:")
+while a > 0 {
+    output(a)
+    if a < 15 {
+        StopRightNow
+    }
+    a = a - 1
+}
+
+output(a)
+
+output("")
+output("Continue statement")
+while a > 0 {
+    a = a - 1
+    if a % 2 == 0 {
+        continue
+    } else {
+        output(a)
+    }
+}

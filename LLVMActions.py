@@ -20,6 +20,7 @@ class LLVMActions(JFKListener):
         self.function_variables = {}
         self.in_function = False
         self.functions = {}
+        self.in_loop = False
 
     def exitOutput(self, ctx: JFKParser.OutputContext):
         value = self.stack.pop()  # type: Value
@@ -229,6 +230,7 @@ class LLVMActions(JFKListener):
 
     def enterWhile(self, ctx: JFKParser.WhileContext):
         self.generator.start_while()
+        self.in_loop = True
 
     def enterLoopblock(self, ctx: JFKParser.LoopblockContext):
         condition = self.stack.pop()
@@ -239,6 +241,7 @@ class LLVMActions(JFKListener):
 
     def exitWhile(self, ctx: JFKParser.WhileContext):
         self.generator.end_while()
+        self.in_loop = False
 
     def enterFunc(self, ctx: JFKParser.FuncContext):
         name = ctx.ID().getText()
@@ -283,6 +286,18 @@ class LLVMActions(JFKListener):
             self.stack.append(Value("%" + str(self.generator.str_i - 1), VarType(return_type), False))
         except KeyError:
             self.error(ctx.start.line, f"Unresolved function name '{fname}'")
+
+    def exitBreak(self, ctx: JFKParser.BreakContext):
+        if self.in_loop:
+            self.generator.break_loop()
+        else:
+            self.error(ctx.start.line, f"Cannot use {ctx.BREAK().getText()} keyword outside of loop")
+
+    def exitContinue(self, ctx: JFKParser.ContinueContext):
+        if self.in_loop:
+            self.generator.continue_loop()
+        else:
+            self.error(ctx.start.line, f"Cannot use {ctx.CONTINUE().getText()} keyword outside of loop")
 
     # =============================================================================
 

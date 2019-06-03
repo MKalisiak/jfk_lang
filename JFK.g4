@@ -33,6 +33,8 @@ statement:	  OUTPUT '(' expression ')'                 #output
 	        | IF expression ifblock (ELSE elseblock)?   #ifStmt
 	        | WHILE expression loopblock                #while
 	        | RETURN expression                         #return
+	        | BREAK                                     #break
+	        | CONTINUE                                  #continue
    ;
 
 expression:   value			             #single
@@ -63,6 +65,12 @@ value:   ID                         #id
    ;
 
 args: expression (',' expression)*
+    ;
+
+BREAK: 'StopRightNow'
+    ;
+
+CONTINUE: 'continue'
     ;
 
 RETURN: 'return'

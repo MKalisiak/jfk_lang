@@ -18,6 +18,7 @@ class LLVMGenerator:
     strings_declared = {}
     cond_count = 1
     ifstack = deque()
+    whilestack = deque()
     main_str_i = None
     buffer = ""
 
@@ -498,7 +499,7 @@ class LLVMGenerator:
         self.cond_count += 1
         self.buffer += f"br label %while{self.cond_count}\n"
         self.buffer += f"while{self.cond_count}:\n"
-        self.ifstack.append(self.cond_count)
+        self.whilestack.append(self.cond_count)
 
     def start_while_block(self, condition: str, is_id: bool):
         if is_id:
@@ -508,14 +509,14 @@ class LLVMGenerator:
             tmp = condition
 
         # self.cond_count += 1
-        self.buffer += f"br i1 {tmp}, label %whileBlock{self.ifstack[-1]}, label %endWhile{self.ifstack[-1]}\n"
-        self.buffer += f"whileBlock{self.ifstack[-1]}:\n"
+        self.buffer += f"br i1 {tmp}, label %whileBlock{self.whilestack[-1]}, label %endWhile{self.whilestack[-1]}\n"
+        self.buffer += f"whileBlock{self.whilestack[-1]}:\n"
 
     def back_to_while(self):
-        self.buffer += f"br label %while{self.ifstack[-1]}\n"
+        self.buffer += f"br label %while{self.whilestack[-1]}\n"
 
     def end_while(self):
-        self.buffer += f"endWhile{self.ifstack.pop()}:\n"
+        self.buffer += f"endWhile{self.whilestack.pop()}:\n"
 
     ###################################################################################################
 
@@ -583,6 +584,14 @@ class LLVMGenerator:
         args_str = ', '.join(args_str)
 
         self.buffer += f"%{self.reg} = call {types[return_type]} @{name}({args_str})\n"
+        self.str_i += 1
+
+    def break_loop(self):
+        self.buffer += f"br label %endWhile{self.whilestack[-1]}\n"
+        self.str_i += 1
+
+    def continue_loop(self):
+        self.buffer += f"br label %while{self.whilestack[-1]}\n"
         self.str_i += 1
 
     ####################################################################################################
