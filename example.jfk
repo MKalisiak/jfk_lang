@@ -31,13 +31,11 @@ output(a)
 
 output("")
 output("Recursion - fibonacci:")
-output(fib(0))
-output(fib(1))
-output(fib(2))
-output(fib(3))
-output(fib(4))
-output(fib(5))
-output(fib(6))
+i = 0
+while i <= 7 {
+    output(fib(i))
+    i = i + 1
+}
 
 output("")
 output("Stop right now statement:")
