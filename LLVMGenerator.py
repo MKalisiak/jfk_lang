@@ -533,7 +533,19 @@ class LLVMGenerator:
         self.buffer = ""
 
     def return_func(self, name: str, _type: VarType, is_id: bool):
-        self.buffer += f"ret {types[_type.value]} {'%' if is_id else ''}{name}\n"
+        return_type = types[_type.value]
+        if is_id:
+            if return_type == "i32":
+                self.load_i32(name)
+            elif return_type == "double":
+                self.load_double(name)
+            elif return_type == "i1":
+                self.load_bool(name)
+            self.buffer += f"ret {return_type} %{self.prev_str()}\n"
+        else:
+            self.buffer += f"ret {return_type} {name}\n"
+
+        self.str_i += 1
 
     def exit_func(self, return_type, had_return):
         ret_default_value = {

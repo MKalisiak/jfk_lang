@@ -2,16 +2,36 @@ a:int, b:int -> sum:int -> {
     return a + b
 }
 
-a:float, b:int -> power:float -> {
-    i = 1
-    while i < b {
-        a = a * a
-        i = i + 1
+n:int -> fib:int -> {
+    if n == 0 {
+        return 1
     }
-    return a
+
+    if n == 1 {
+        return 1
+    }
+
+    return fib(n - 1) + fib(n - 2)
 }
 
-a = sum(6, 4)
-b = power(2.0, 3)
+a:float, b:int -> power:float -> {
+    i = 1
+    c = a
+    while i < b {
+        c = c * a
+        i = i + 1
+    }
+    return c
+}
+
+a = sum(6, 4) + power(2.0, 3)
 
 output(a)
+
+output(fib(0))
+output(fib(1))
+output(fib(2))
+output(fib(3))
+output(fib(4))
+output(fib(5))
+output(fib(6))
